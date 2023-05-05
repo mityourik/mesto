@@ -1,0 +1,10 @@
+.profile__columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 729px) {
+    .profile__columns {
+        flex-direction: column;
+    }
+}

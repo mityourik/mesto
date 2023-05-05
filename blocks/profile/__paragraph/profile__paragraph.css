@@ -1,0 +1,17 @@
+.profile__paragraph {
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+}
+
+@media screen and (max-width: 729px) {
+    .profile__paragraph {
+        font-size: 14px;
+        line-height: 17px;
+        margin: 9px 0 0 0;
+    }
+}

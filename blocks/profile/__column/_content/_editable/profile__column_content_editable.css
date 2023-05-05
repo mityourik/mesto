@@ -1,0 +1,14 @@
+.profile__column_content_editable {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 0 0 30px;
+    position: relative;
+}
+
+@media screen and (max-width: 729px) {
+    .profile__column_content_editable {
+        margin: 0;
+        align-items: center;
+    }
+}

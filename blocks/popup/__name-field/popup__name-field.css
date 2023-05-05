@@ -1,0 +1,24 @@
+.popup__name-field {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    margin: 48px 0 0 0;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 8px;
+    display: block;
+    width: 100%;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 729px) {
+    .popup__name-field {
+        margin: 75px 0 0 0;
+    }
+}

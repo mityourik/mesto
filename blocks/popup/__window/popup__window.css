@@ -1,0 +1,21 @@
+.popup__window {
+    width: 430px;
+    height: 330px;
+    background-color: #fff;
+    border-radius: 10px;
+    position: fixed;
+    top: 195px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+@media screen and (max-width: 729px) {
+    .popup__window {
+        width: 282px;
+        height: 322px;
+        top: 123px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

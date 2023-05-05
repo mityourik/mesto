@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Место</title>
+</head>
+<body class="body">
+    <div class="page">
+        <header class="header">
+            <div class="header__container">
+                <img src="./images/header__logo.svg" alt="Лого Место" class="header__logo">
+            </div>
+            </header>
+        <main class="main">
+            <section class="profile">
+                <div class="profile__columns">
+                    <div class="profile__column profile__column_content_info">
+                        <img src="./images/profile__avatar-image.jpg" alt="Аватар Жак-Ив Кусто" class="profile__image">
+                        <div class="profile__column_content_editable">
+                            <h1 class="profile__title">Жак-Ив Кусто</h1>
+                            <p class="profile__paragraph">Исследователь океана</p>
+                            <img src="./images/profile__edit-button.svg"  class="profile__edit-button profile__popup-open" alt="Кнопка редактирования профиля">
+                        </div> 
+                    </div>
+                    <div class="profile__column profile__column_content_add-button">
+                        <picture class="profile__add-button">
+                            <source srcset="./images/profile__add-button_729.svg" media="(max-width: 729px)">
+                            <img src="./images/profile__add-button.svg" alt="Кнопка добавить">
+                        </picture>
+                    </div>
+                </div>
+            </section>
+            <section class="elements">
+                <div class="elements__cards">
+                    <div class="element__card">
+                        <div class="element__rectangle">
+                            <img class="element__photo" src="./images/element__image-karachaevsk.jpg" alt="Фото акулы">
+                            <h3 class="element__title">Карачаевск</h3>
+                            <img src="./images/element__like-image.svg" class="element__like-image_inactive" alt="Иконка нравится">
+                        </div>
+                    </div>
+                    <div class="element__card">
+                        <div class="element__rectangle">
+                            <img class="element__photo" src="./images/elements__image-tyrnyauz.jpg" alt="Фото акулы">
+                            <h3 class="element__title">Тырныауз</h3>
+                            <img src="./images/element__like-image.svg" class="element__like-image_inactive" alt="Иконка нравится">
+                        </div>
+                    </div>
+                    <div class="element__card">
+                        <div class="element__rectangle">
+                            <img class="element__photo" src="./images/elements__image-dombay.jpg" alt="Фото акулы">
+                            <h3 class="element__title">Домбай</h3>
+                            <img src="./images/element__like-image.svg" class="element__like-image_inactive" alt="Иконка нравится">
+                        </div>
+                    </div>
+                    <div class="element__card">
+                        <div class="element__rectangle">
+                            <img class="element__photo" src="./images/elements__image-zalukokoazhe.jpg" alt="Фото акулы">
+                            <h3 class="element__title">Залукокоаже</h3>
+                            <img src="./images/element__like-image.svg" class="element__like-image_inactive" alt="Иконка нравится">
+                        </div>
+                    </div>
+                    <div class="element__card">
+                        <div class="element__rectangle">
+                            <img class="element__photo" src="./images/elements__image-azau.jpg" alt="Фото акулы">
+                            <h3 class="element__title">Азау</h3>
+                            <img src="./images/element__like-image.svg" class="element__like-image_inactive" alt="Иконка нравится">
+                        </div>
+                    </div>
+                    <div class="element__card">
+                        <div class="element__rectangle">
+                            <img class="element__photo" src="./images/elements__image-verhniy-baksan.jpg" alt="Фото акулы">
+                            <h3 class="element__title">Село Верхний Баксан</h3>
+                            <img src="./images/element__like-image.svg" class="element__like-image_inactive" alt="Иконка нравится">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+        </footer>
+        <div class="popup">
+            <div class="popup__window">
+                <img src="./images/popup__close-button.svg" alt="Кнопка закрыть" class="popup__close-button">
+                <div class="popup__content">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <form class="popup__form">
+                        <input type="text" class="popup__name-field">
+                        <input type="text" class="popup__description-field">
+                    </form>
+                    <div class="popup__save-button">
+                        <p class="popup__save-button_text">Сохранить</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="./blocks/scripts/index.js"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.element__like-image_inactive {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.element__like-image_inactive:hover {
+    opacity: 0.5;
+}

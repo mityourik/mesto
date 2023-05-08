@@ -1,6 +1,6 @@
 .profile__paragraph {
     color: #fff;
-    font-family: 'Inter';
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;

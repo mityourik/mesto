@@ -2,8 +2,8 @@
     width: 24px;
     margin: 0;
     position: absolute;
-    right: 0;
-    bottom: 55px;
+    right: 1px;
+    bottom: 60px;
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
     cursor: pointer;

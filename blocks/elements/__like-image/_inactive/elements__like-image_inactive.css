@@ -1,4 +1,4 @@
-.element__like-image_inactive {
+.elements__like-image_inactive {
     position: absolute;
     right: 20px;
     bottom: 30px;
@@ -7,6 +7,6 @@
     cursor: pointer;
 }
 
-.element__like-image_inactive:hover {
+.elements__like-image_inactive:hover {
     opacity: 0.5;
 }

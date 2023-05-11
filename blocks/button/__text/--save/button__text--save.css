@@ -1,4 +1,4 @@
-.popup__save-button_text {
+.button__text--save {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 729px) {
-    .popup__save-button_text {
+    .button__text--save {
         font-size: 14px;
         line-height: 17px;
     }

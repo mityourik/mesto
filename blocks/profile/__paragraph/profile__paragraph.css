@@ -8,7 +8,7 @@
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 336px;
+    max-width: 294px;
     width: 100%;
     white-space: nowrap;
 }

@@ -1,22 +1,17 @@
-.profile__edit-button {
+.profile__edit-icon {
     width: 24px;
     margin: 0;
-    position: absolute;
-    right: 1px;
-    bottom: 60px;
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
     cursor: pointer;
 }
 
-.profile__edit-button:hover {
+.profile__edit-icon:hover {
     opacity: 0.6;
 }
 
 @media screen and (max-width: 729px) {
-    .profile__edit-button {
+    .profile__edit-icon {
         width: 18px;
-        right: 19px;
-        bottom: 32px;
     }
 }

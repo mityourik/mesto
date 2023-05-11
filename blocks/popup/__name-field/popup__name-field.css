@@ -5,10 +5,9 @@
     font-size: 14px;
     line-height: 17px;
     color: #000000;
-    margin: 48px 0 0 0;
+    margin: 48px auto 0 auto;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    padding-bottom: 8px;
-    display: block;
+    padding: 0 0 8px 0;
     width: 100%;
     outline: none;
     border-top: none;

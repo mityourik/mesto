@@ -1,12 +1,12 @@
 .profile__image {
     width: 120px;
     border-radius: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 729px) {
     .profile__image {
-        display: flex;
-        margin: 0 auto;
+        grid-area: image;
+        margin: 0 0 0 82px;
     }
 }

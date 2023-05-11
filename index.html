@@ -10,10 +10,8 @@
 <body class="body">
     <div class="page">
         <header class="header">
-            <div class="header__container">
-                <img src="./images/header__logo.svg" alt="Лого Место" class="header__logo">
-            </div>
-            </header>
+            <img src="./images/header__logo.svg" alt="Лого Место" class="header__logo">
+        </header>
         <main class="main">
             <section class="profile">
                 <div class="profile__columns">
@@ -22,83 +20,99 @@
                         <div class="profile__column profile__column_content_editable">
                             <h1 class="profile__title">Жак-Ив Кусто</h1>
                             <p class="profile__paragraph">Исследователь океана</p>
-                            <img src="./images/profile__edit-button.svg"  class="profile__edit-button profile__popup-open" alt="Кнопка редактирования профиля">
-                        </div> 
+                        </div>
+                        <button class="button button__edit_profile" type="button" aria-label=" Кнопка Редактировать профиль">
+                            <img src="./images/profile__edit-button.svg"  class="profile__edit-icon profile__popup-open" alt="Кнопка редактирования профиля">
+                        </button>
                     </div>
                     <div class="profile__column profile__column_content_add-button">
-                        <picture class="profile__add-button">
-                            <source srcset="./images/profile__add-button_729.svg" media="(max-width: 729px)">
-                            <img src="./images/profile__add-button.svg" alt="Кнопка добавить">
-                        </picture>
+                        <button class="button" type="button" aria-label="Кнопка Добавить профиль">
+                            <picture class="profile__add-icon">
+                                <source srcset="./images/profile__add-button_729.svg" media="(max-width: 729px)">
+                                <img src="./images/profile__add-button.svg" alt="Кнопка Добавить">
+                            </picture>
+                        </button>
                     </div>
                 </div>
             </section>
             <section class="elements">
-                <div class="elements__cards">
-                    <div class="elements__card">
-                        <div class="elements__rectangle">
-                            <img class="elements__photo" src="./images/element__image-karachaevsk.jpg" alt="Фото акулы">
+                <ul class="elements__cards">
+                    <li class="elements__cell">
+                        <img class="elements__photo" src="./images/element__image-karachaevsk.jpg" alt="Фото акулы">
+                        <div class="elements__title-container">
                             <h3 class="elements__title">Карачаевск</h3>
-                            <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_inactive" alt="Иконка нравится">
+                            <button class="button" type="button" aria-label="Кнопка Нравится">
+                                <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_state_inactive" alt="Кнопка Нравится">
+                            </button>
                         </div>
-                    </div>
-                    <div class="elements__card">
-                        <div class="elements__rectangle">
-                            <img class="elements__photo" src="./images/elements__image-tyrnyauz.jpg" alt="Фото акулы">
+                    </li>
+                    <li class="elements__cell">
+                        <img class="elements__photo" src="./images/elements__image-tyrnyauz.jpg" alt="Фото акулы">
+                        <div class="elements__title-container">
                             <h3 class="elements__title">Тырныауз</h3>
-                            <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_inactive" alt="Иконка нравится">
+                            <button class="button" type="button" aria-label="Кнопка Нравится">
+                                <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_state_inactive" alt="Кнопка Нравится">
+                            </button>
                         </div>
-                    </div>
-                    <div class="elements__card">
-                        <div class="elements__rectangle">
-                            <img class="elements__photo" src="./images/elements__image-dombay.jpg" alt="Фото акулы">
+                    </li>
+                    <li class="elements__cell">
+                        <img class="elements__photo" src="./images/elements__image-dombay.jpg" alt="Фото акулы">
+                        <div class="elements__title-container">
                             <h3 class="elements__title">Домбай</h3>
-                            <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_inactive" alt="Иконка нравится">
+                            <button class="button" type="button" aria-label="Кнопка Нравится">
+                                <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_state_inactive" alt="Кнопка Нравится">
+                            </button>
                         </div>
-                    </div>
-                    <div class="elements__card">
-                        <div class="elements__rectangle">
-                            <img class="elements__photo" src="./images/elements__image-zalukokoazhe.jpg" alt="Фото акулы">
+                    </li>
+                    <li class="elements__cell">
+                        <img class="elements__photo" src="./images/elements__image-zalukokoazhe.jpg" alt="Фото акулы">
+                        <div class="elements__title-container">
                             <h3 class="elements__title">Залукокоаже</h3>
-                            <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_inactive" alt="Иконка нравится">
+                            <button class="button" type="button" aria-label="Кнопка Нравится">
+                                <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_state_inactive" alt="Кнопка Нравится">
+                            </button>
                         </div>
-                    </div>
-                    <div class="elements__card">
-                        <div class="elements__rectangle">
-                            <img class="elements__photo" src="./images/elements__image-azau.jpg" alt="Фото акулы">
+                    </li>
+                    <li class="elements__cell">
+                        <img class="elements__photo" src="./images/elements__image-azau.jpg" alt="Фото акулы">
+                        <div class="elements__title-container">
                             <h3 class="elements__title">Азау</h3>
-                            <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_inactive" alt="Иконка нравится">
+                            <button class="button" type="button" aria-label="Кнопка Нравится">
+                                <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_state_inactive" alt="Кнопка Нравится">
+                            </button>
                         </div>
-                    </div>
-                    <div class="elements__card">
-                        <div class="elements__rectangle">
-                            <img class="elements__photo" src="./images/elements__image-verhniy-baksan.jpg" alt="Фото акулы">
+                    </li>
+                    <li class="elements__cell">
+                        <img class="elements__photo" src="./images/elements__image-verhniy-baksan.jpg" alt="Фото акулы">
+                        <div class="elements__title-container">
                             <h3 class="elements__title">Село Верхний Баксан</h3>
-                            <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_inactive" alt="Иконка нравится">
+                            <button class="button" type="button" aria-label="Кнопка Нравится">
+                                <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_state_inactive" alt="Кнопка Нравится">
+                            </button>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
         </footer>
         <div class="popup">
-            <div class="popup__window">
-                <img src="./images/popup__close-button.svg" alt="Кнопка закрыть" class="popup__close-button">
-                <div class="popup__content">
-                    <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="popup__form">
-                        <input type="text" class="popup__name-field">
-                        <input type="text" class="popup__description-field">
-                    </form>
-                    <div class="popup__save-button">
-                        <p class="popup__save-button popup__save-button_text">Сохранить</p>
-                    </div>
-                </div>
+            <div class="popup__container">
+                <button class="button" type="button" aria-label="Кнопка Закрыть окно">
+                    <img src="./images/popup__close-button.svg" alt="Кнопка Закрыть" class="popup__close-button">
+                </button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form class="popup__profile-form">
+                    <input type="text" placeholder="Напиши имя путешественника" class="popup__input popup__input_field_title popup__name-field">
+                    <input type="text" placeholder="Сюда - описание путешественника" class="popup__input popup__input_field_description popup__description-field">
+                </form>
+                <button class="button popup__save-button" type="submit" aria-label="Кнопка Сохранить изменения">
+                    <span class="popup__save-button_text">Сохранить</span>
+                </button>
             </div>
         </div>
-        <script src="./blocks/scripts/index.js"></script>
+        <script src="./index.js"></script>
     </div>
 </body>
 </html>

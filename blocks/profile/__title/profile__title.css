@@ -1,5 +1,5 @@
 .profile__title {
-    min-width: 337px;
+    max-width: 294px;
     width: 100%;
     color: #fff;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
@@ -9,14 +9,16 @@
     line-height: 114%;
     margin: 0;
     padding-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 729px) {
     .profile__title {
-        min-width: 189px;
         font-size: 27px;
         line-height: 33px;
-        margin: 26px 0 0 0;
-        text-align: center;
+        padding: 0;
+        max-width: 189px;
     }
 }

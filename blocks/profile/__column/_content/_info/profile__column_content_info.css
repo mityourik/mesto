@@ -4,6 +4,14 @@
 
 @media screen and (max-width: 729px) {
     .profile__column_content_info {
-        flex-direction: column;
+        display: grid;
+        max-width: 282px;
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(min-content, max-content));
+        grid-template-rows: repeat(3, minmax(min-content, max-content));
+        grid-template-areas:
+        "image image"
+        "title button"
+        "title button"
     }
 }

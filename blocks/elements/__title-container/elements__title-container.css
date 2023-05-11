@@ -1,0 +1,7 @@
+.elements__title-container {
+    display: flex;
+    max-width: 246px;
+    width: 100%;
+    margin: 20px auto auto auto;
+    justify-content: space-between;
+}

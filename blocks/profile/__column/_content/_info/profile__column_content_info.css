@@ -12,6 +12,6 @@
         grid-template-areas:
         "image image"
         "title button"
-        "title button"
+        "title button";
     }
 }

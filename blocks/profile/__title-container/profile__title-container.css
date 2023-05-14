@@ -1,9 +1,0 @@
-.profile__title-container {
-    display: flex;
-}
-
-@media screen and (max-width: 729px) {
-    .profile__title-container {
-        margin: 0;
-    }
-}

@@ -2,11 +2,11 @@
     width: 120px;
     border-radius: 100%;
     object-fit: cover;
+    grid-area: image;
 }
 
 @media screen and (max-width: 729px) {
     .profile__image {
-        grid-area: image;
         margin: 0 0 0 82px;
     }
 }

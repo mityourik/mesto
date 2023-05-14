@@ -2,6 +2,6 @@
     display: flex;
     max-width: 246px;
     width: 100%;
-    margin: 20px auto auto auto;
+    margin: 20px auto 24px auto;
     justify-content: space-between;
 }

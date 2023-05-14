@@ -1,10 +1,12 @@
 .profile__add-icon {
-    display: flex;
     width: 150px;
     height: 50px;
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
     cursor: pointer;
+    grid-area: add-button;
+    align-self: center;
+    justify-self: end;
 }
 
 .profile__add-icon:hover {

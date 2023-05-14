@@ -1,11 +1,11 @@
 .profile__edit-button {
     margin: 36px 0 0 19px;
-    display: flex;
-    width: 24px;
-    height: 24px;
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
     cursor: pointer;
+    grid-area: edit-button;
+    width: 24px;
+    height: 24px;
 }
 
 .profile__edit-button:hover {
@@ -14,9 +14,8 @@
 
 @media screen and (max-width: 728px) {
     .profile__edit-button {
-        margin: 35px 0 0 10px;
-        grid-area: button;
         width: 18px;
         height: 18px;
-    }   
+        margin: 36px 8px 0 0;
+    }    
 }

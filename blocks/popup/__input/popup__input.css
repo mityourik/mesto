@@ -1,14 +1,13 @@
-.popup__description-field {
+.popup__input {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #000000;
-    margin: 30px auto 0 auto;
+    margin: 29px auto 0 auto;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 0 0 10px 0;
-    display: block;
+    padding: 0 0 8px 0;
     width: 100%;
     outline: none;
     border-top: none;

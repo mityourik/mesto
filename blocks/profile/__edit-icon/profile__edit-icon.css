@@ -1,17 +1,9 @@
 .profile__edit-icon {
     width: 24px;
-    margin: 0;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out;
-    cursor: pointer;
 }
 
-.profile__edit-icon:hover {
-    opacity: 0.6;
-}
-
-@media screen and (max-width: 729px) {
+@media screen and (max-width: 728px) {
     .profile__edit-icon {
         width: 18px;
-    }
+    }    
 }

@@ -2,6 +2,12 @@
     max-width: 880px;
     width: 100%;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto min-content auto 1fr;
+    grid-template-rows: repeat(2, minmax(min-content, max-content));
+    grid-template-areas: 
+    "image title edit-button add-button"
+    "image paragraph edit-button add-button";
 }
 
 @media screen and (max-width: 928px) {
@@ -14,5 +20,12 @@
     .profile {
         max-width: 282px;
         margin: 40px auto 36px;
+        grid-template-columns: repeat(2, minmax(min-content, max-content));
+        grid-template-rows: repeat(4, minmax(min-content, max-content));
+        grid-template-areas: 
+    "image image"
+    "title edit-button"
+    "paragraph paragraph"
+    "add-button add-button";
     }
 }

@@ -8,7 +8,6 @@ const descriptionField = form.querySelector('[name="profile-input_description"]'
 const profileTitle = document.querySelector('.profile__title');
 const profileParagraph = document.querySelector('.profile__paragraph');
 
-
 const togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popup_opened');
 
 buttonPopupOpen.addEventListener('click', () => {
@@ -18,13 +17,6 @@ buttonPopupOpen.addEventListener('click', () => {
 });
 
 buttonPopupClose.addEventListener('click', () => {
-  togglePopupState(popup);
-});
-
-buttonPopupSave.addEventListener('click', (event) => {
-  event.preventDefault();
-  profileTitle.textContent = nameField.value;
-  profileParagraph.textContent = descriptionField.value;
   togglePopupState(popup);
 });
 

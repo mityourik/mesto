@@ -1,0 +1,11 @@
+.popup__preview-name {
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    align-self: flex-start;
+    padding: 0;
+    margin: 10px 0 0 0;
+}

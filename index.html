@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./images/favicon_logo.png">
     <link rel="stylesheet" href="./pages/index.css">
     <title>Место</title>
 </head>
@@ -30,7 +31,12 @@
             <section class="elements">
                 <ul class="elements__cards">
                     <li class="elements__cell">
-                        <img class="elements__photo" src="./images/element__image-karachaevsk.jpg" alt="Фото акулы">
+                        <a href="#" class="elements__image-preview">
+                            <img class="elements__photo" src="./images/element__image-karachaevsk.jpg" alt="Фото акулы">
+                        </a>
+                        <button class="button elements__trash-button" type="button" aria-label="Кнопка Удалить карточку">
+                            <img src="./images/elements__trash-image.svg" class="elements__trash-image" alt="Кнопка Удалить карточку">
+                        </button>
                         <div class="elements__title-container">
                             <h3 class="elements__title">Карачаевск</h3>
                             <button class="button elements__like-button" type="button" aria-label="Кнопка Нравится">
@@ -39,7 +45,12 @@
                         </div>
                     </li>
                     <li class="elements__cell">
-                        <img class="elements__photo" src="./images/elements__image-tyrnyauz.jpg" alt="Фото акулы">
+                        <a href="#" class="elements__image-preview">
+                            <img class="elements__photo" src="./images/elements__image-tyrnyauz.jpg" alt="Фото акулы">
+                        </a>
+                        <button class="button elements__trash-button" type="button" aria-label="Кнопка Удалить карточку">
+                            <img src="./images/elements__trash-image.svg" class="elements__trash-image" alt="Кнопка Удалить карточку">
+                        </button>
                         <div class="elements__title-container">
                             <h3 class="elements__title">Тырныауз</h3>
                             <button class="button elements__like-button" type="button" aria-label="Кнопка Нравится">
@@ -48,7 +59,12 @@
                         </div>
                     </li>
                     <li class="elements__cell">
-                        <img class="elements__photo" src="./images/elements__image-dombay.jpg" alt="Фото акулы">
+                        <a href="#" class="elements__image-preview">
+                            <img class="elements__photo" src="./images/elements__image-dombay.jpg" alt="Фото акулы">
+                        </a>
+                        <button class="button elements__trash-button" type="button" aria-label="Кнопка Удалить карточку">
+                            <img src="./images/elements__trash-image.svg" class="elements__trash-image" alt="Кнопка Удалить карточку">
+                        </button>
                         <div class="elements__title-container">
                             <h3 class="elements__title">Домбай</h3>
                             <button class="button elements__like-button" type="button" aria-label="Кнопка Нравится">
@@ -57,7 +73,12 @@
                         </div>
                     </li>
                     <li class="elements__cell">
-                        <img class="elements__photo" src="./images/elements__image-zalukokoazhe.jpg" alt="Фото акулы">
+                        <a href="#" class="elements__image-preview">
+                            <img class="elements__photo" src="./images/elements__image-zalukokoazhe.jpg" alt="Фото акулы">
+                        </a>
+                        <button class="button elements__trash-button" type="button" aria-label="Кнопка Удалить карточку">
+                            <img src="./images/elements__trash-image.svg" class="elements__trash-image" alt="Кнопка Удалить карточку">
+                        </button>
                         <div class="elements__title-container">
                             <h3 class="elements__title">Залукокоаже</h3>
                             <button class="button elements__like-button" type="button" aria-label="Кнопка Нравится">
@@ -66,7 +87,12 @@
                         </div>
                     </li>
                     <li class="elements__cell">
-                        <img class="elements__photo" src="./images/elements__image-azau.jpg" alt="Фото акулы">
+                        <a href="#" class="elements__image-preview">
+                            <img class="elements__photo" src="./images/elements__image-azau.jpg" alt="Фото акулы">
+                        </a>
+                        <button class="button elements__trash-button" type="button" aria-label="Кнопка Удалить карточку">
+                            <img src="./images/elements__trash-image.svg" class="elements__trash-image" alt="Кнопка Удалить карточку">
+                        </button>
                         <div class="elements__title-container">
                             <h3 class="elements__title">Азау</h3>
                             <button class="button elements__like-button" type="button" aria-label="Кнопка Нравится">
@@ -75,7 +101,12 @@
                         </div>
                     </li>
                     <li class="elements__cell">
-                        <img class="elements__photo" src="./images/elements__image-verhniy-baksan.jpg" alt="Фото акулы">
+                        <a href="#" class="elements__image-preview">
+                            <img class="elements__photo" src="./images/elements__image-verhniy-baksan.jpg" alt="Фото акулы">
+                        </a>
+                        <button class="button elements__trash-button" type="button" aria-label="Кнопка Удалить карточку">
+                            <img src="./images/elements__trash-image.svg" class="elements__trash-image" alt="Кнопка Удалить карточку">
+                        </button>
                         <div class="elements__title-container">
                             <h3 class="elements__title">Село Верхний Баксан</h3>
                             <button class="button elements__like-button" type="button" aria-label="Кнопка Нравится">
@@ -104,6 +135,46 @@
                 </form>
             </div>
         </div>
+        <div class="popup popup_content_cell">
+            <div class="popup__container">
+                <button class="button button_close_cell" type="button" aria-label="Кнопка Закрыть окно">
+                    <img src="./images/popup__close-button.svg" alt="Кнопка Закрыть" class="popup__close-button">
+                </button>
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__profile-form popup__profile-form_content_cell" name="elements-form" novalidate>
+                    <input class="popup__input popup__input_content_name" type="text" name="elements_input_name" placeholder="Введите название путешествия" required>
+                    <input class="popup__input popup__input_content_link" type="text" name="elements_input_link" placeholder="Введите адрес картинки" required>
+                    <button class="button popup__save-button button__save-cell" type="submit" aria-label="Кнопка Сохранить изменения">
+                        <span class="button__text button__text-save">Создать</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="popup popup_content_preview">
+            <div class="popup__container popup__container_content_image">
+                <button class="button button_close_preview" type="button" aria-label="Кнопка Закрыть окно">
+                    <img src="./images/popup__close-button.svg" alt="Кнопка Закрыть" class="popup__close-button">
+                </button>
+                <img alt="Фото путешествия" class="popup__image-preview" src="#">
+                <h2 class="popup__preview-name"></h2>
+            </div>
+        </div>
+        <template class="template-cell">
+            <li class="elements__cell">
+                <a href="#" class="elements__image-preview">
+                    <img class="elements__photo" src="#" alt="Фото пользователя">
+                </a>
+                <button class="button elements__trash-button" type="button" aria-label="Кнопка Удалить карточку">
+                    <img src="./images/elements__trash-image.svg" class="elements__trash-image" alt="Кнопка Удалить карточку">
+                </button>
+                <div class="elements__title-container">
+                    <h3 class="elements__title"></h3>
+                    <button class="button elements__like-button" type="button" aria-label="Кнопка Нравится">
+                        <img src="./images/element__like-image.svg" class="elements__like-image elements__like-image_enabled" alt="Кнопка Нравится">
+                    </button>
+                </div>
+            </li>
+        </template>
         <script src="./index.js"></script>
     </div>
 </body>

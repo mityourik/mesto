@@ -15,3 +15,8 @@
     border-right: none;
     box-sizing: border-box;
 }
+
+@media screen and (max-width: 729px) {
+    .popup__input {
+    }    
+}

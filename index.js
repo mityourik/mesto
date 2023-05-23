@@ -43,7 +43,7 @@ const buttonCloseCell = document.querySelector('.button_close_cell');
 const formElements = document.querySelector('[name="elements-form"]');
 const inputNameElements = formElements.querySelector('[name="elements_input_name"]');
 const inputLinkElements = formElements.querySelector('[name="elements_input_link"]');
-const buttonSaveCell = formElements.querySelector('.button__save-cell');
+const buttonSaveCell = formElements.querySelector('.popup__save-cell');
 const templateItem = document.querySelector('.template-cell').content;
 const buttonDeleteCell = document.querySelector('.elements__trash-image');
 const list = document.querySelector('.elements__cards');

@@ -1,0 +1,14 @@
+.elements__like-image_enabled {
+    background-image: url(../../../../images/element__like-image_enabled.svg);
+    background-repeat: no-repeat;
+    width: 22px;
+    height: 19px;
+    margin: 6px 2px 0 0;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.elements__like-image_enabled:hover {
+    opacity: 0.5;
+}

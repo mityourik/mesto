@@ -1,4 +1,6 @@
 .profile__edit-button {
+    background-image: url(../../../images/profile__edit-button.svg);
+    background-repeat: no-repeat;
     margin: 36px 0 0 19px;
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
@@ -14,6 +16,7 @@
 
 @media screen and (max-width: 728px) {
     .profile__edit-button {
+        background-image: url(../../../images/profile__edit-button_small.svg);
         width: 18px;
         height: 18px;
         margin: 36px 8px 0 0;

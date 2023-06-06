@@ -20,9 +20,15 @@ const updateButtonChangeState = (form) => {
   }
 };
 
-// Функция для сброса значений формы
-const resetForm = (form) => {
+// Функция для сброса формы и ошибок
+const resetFormAndErrors = (form) => {
   form.reset();
+
+  const inputs = form.querySelectorAll('.popup__input');
+  inputs.forEach((input) => {
+    input.classList.remove('popup__input_error');
+    hideError(input);
+  });
 };
 
 // Функция для установки сообщений об ошибке
@@ -83,29 +89,16 @@ const validateInput = (input) => {
 const closePopupWithEsc = () => {
   closePopup(popupCreateCell);
   closePopup(popupProfile);
-  resetForm(formCreateCell);
-  resetForm(profileForm);
-};
-
-// Функция для сброса формы и ошибок
-const resetFormAndErrors = (form) => {
-  form.reset();
-
-  const inputs = form.querySelectorAll('.popup__input');
-  inputs.forEach((input) => {
-    input.classList.remove('popup__input_error');
-    hideError(input);
-  });
+  resetFormAndErrors(formCreateCell);
+  resetFormAndErrors(profileForm);
 };
 
 // Функция для отправки формы
 const sendForm = (evt) => {
   evt.preventDefault();
   const form = evt.target;
-  if (!form.checkValidity()) {
-    console.log('отправлено');
-  } else {
-    resetForm(form);
+  if (form.checkValidity()) {
+    resetFormAndErrors(form);
     updateButtonChangeState(form);
   }
 };

@@ -88,7 +88,7 @@ buttonPopupOpen.addEventListener('click', () => {
   resetFormAndErrors(profileForm); // сброс ошибок и выделения строки при открытии
 
   if (profileNameField.value && profileDescripField.value) {// проверка состояни кнпоки если поля заполнены
-    formSubmitButtonChangeState(profileForm);
+    updateButtonChangeState(profileForm);
   }
 
   openPopup(popupProfile);
@@ -127,7 +127,7 @@ const inputLinkCell = formCreateCell.querySelector('[name="elements_input_link"]
 popupAddCell.addEventListener('click', () => {
   openPopup(popupCreateCell);
   resetFormAndErrors(formCreateCell);//сброс ошибок на дефолтные
-  editButtonChangeState(formCreateCell);// сброс статуса кнопки
+  updateButtonChangeState(formCreateCell);// сброс статуса кнопки
 });
 
 popupCloseCell.addEventListener('click', () => {

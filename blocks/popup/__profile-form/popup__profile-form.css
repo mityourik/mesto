@@ -1,10 +1,4 @@
 .popup__profile-form {
-    max-width: 358px;
-    width: 100%;
-}
-
-@media screen and (max-width: 729px) {
-    .popup__profile-form {
-        max-width: 238px;
-    }
+    display: flex;
+    flex-direction: column;
 }

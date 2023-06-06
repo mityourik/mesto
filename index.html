@@ -33,12 +33,12 @@
             <div class="popup__container">
                 <button class="button popup__close-button" type="button" aria-label="Кнопка Закрыть окно"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__profile-form" name="profile-form">
-                    <input class="popup__input" type="text" name="profile-input_name" placeholder="Напиши имя путешественника">
-                    <input class="popup__input" type="text" name="profile-input_description" placeholder="Сюда - описание путешественника">
-                    <button class="button popup__save-button" type="submit" aria-label="Кнопка Сохранить изменения">
-                        <span class="button__text button__text-save">Сохранить</span>
-                    </button>
+                <form class="popup__profile-form" name="profile-form" novalidate>
+                    <input id="name-profile" class="popup__input" type="text" name="profile-input_name" placeholder="Напиши имя путешественника" minlength="2" maxlength="30" required>
+                    <span id="name-profile-error" class="popup__error"></span>
+                    <input id="description-profile" class="popup__input" type="text" name="profile-input_description" placeholder="Сюда - описание путешественника" minlength="2" maxlength="30" required>
+                    <span id="description-profile-error" class="popup__error"></span>
+                    <button class="button popup__save-button_invalid" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
                 </form>
             </div>
         </div>
@@ -47,11 +47,11 @@
                 <button class="button popup__close-button button_close_cell" type="button" aria-label="Кнопка Закрыть окно"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__profile-form popup__profile-form_content_cell" name="elements-form" novalidate>
-                    <input class="popup__input popup__input_content_name" type="text" name="elements_input_name" placeholder="Введите название путешествия" required>
-                    <input class="popup__input popup__input_content_link" type="text" name="elements_input_link" placeholder="Введите адрес картинки" required>
-                    <button class="button popup__save-button popup__save-cell" type="submit" aria-label="Кнопка Создать">
-                        <span class="button__text button__text-save">Создать</span>
-                    </button>
+                    <input id="name-card" class="popup__input" type="text" name="elements_input_name" placeholder="Введите название путешествия" minlength="2" maxlength="30" required>
+                    <span id="name-card-error" class="popup__error"></span>
+                    <input id="input-link" class="popup__input" type="url" name="elements_input_link" placeholder="Введите адрес картинки" required>
+                    <span id="input-link-error" class="popup__error"></span>
+                    <button class="button popup__save-button_invalid" type="submit" aria-label="Кнопка Создать">Создать</button>
                 </form>
             </div>
         </div>
@@ -76,6 +76,7 @@
         </template>
         <script src="./scripts/cards.js"></script>
         <script src="./scripts/index.js"></script>
+        <script src="./scripts/validate.js"></script>
     </div>
 </body>
 </html>

@@ -5,18 +5,12 @@
     font-size: 14px;
     line-height: 17px;
     color: #000000;
-    margin: 29px auto 0 auto;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: 0 0 8px 0;
+    max-width: 357px;
     width: 100%;
     outline: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
     box-sizing: border-box;
-}
-
-@media screen and (max-width: 729px) {
-    .popup__input {
-    }    
 }

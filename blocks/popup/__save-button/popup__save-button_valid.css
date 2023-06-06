@@ -1,0 +1,5 @@
+.popup__save-button_valid {
+    background: #000;
+    cursor: pointer;
+    color: #fff;
+}

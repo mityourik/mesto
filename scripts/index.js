@@ -1,3 +1,12 @@
+const validationSettings = {
+  formSelector: '.popup__profile-form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  activeButtonClass: 'popup__save-button_valid',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error_visible'
+};
+
 const templateItem = document.querySelector('.template-cell');
 const elementsItem = document.querySelector('.elements__cards');
 
@@ -42,36 +51,45 @@ const buttonAddNewCell = document.querySelector('.profile__add-icon');
 const popupContentCell = document.querySelector('.popup_content_cell');
 const buttonClosePopupCell = document.querySelector('.button_close_cell');
 
-// Функция для открытия попап-окна с установкой слушателей
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  buttonClosePopupCell.addEventListener('click', () => {
-    closePopup(popup);
-  });
-  document.addEventListener('keydown', (event) => {
-    closePopupOnEsc(event, popup);
-  });
-  formCreateCell.reset();
-}
+const openPopup = (popupToOpen) => {
+  popupToOpen.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscKeydown); // обработчик события для Esc
 
-// Функция для закрытия попап-окна с удалением слушателей
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  buttonClosePopupCell.removeEventListener('click', closePopup);
-  document.removeEventListener('keydown', closePopupOnEsc);
-}
-
-// Функция для закрытия попап-окна через Esc
-function closePopupOnEsc(event, popup) {
-  if (event.key === 'Escape') {
-    closePopup(popup);
+  const formElement = popupToOpen.querySelector(validationSettings.formSelector);
+  if (formElement) {
+    enableValidation(validationSettings);
   }
+};
+
+const closePopup = (popupToClose) => {
+  popupToClose.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscKeydown); // удалил обработчик события для Esc
+};
+
+const handleEscKeydown = (event) => {
+  if (event.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    if (openedPopup) {
+      closePopup(openedPopup);
+    }
+  }
+}
+
+//функция для сброса значения полей инпута новой карточки
+function resetForm() {
+  inputNameCell.value = '';
+  inputLinkCell.value = '';
 }
 
 // Обработчик события для открытия попапа
 buttonAddNewCell.addEventListener('click', () => {
   openPopup(popupContentCell);
-  validation.resetErrors(popupContentCell);// сброс ошибок на дефолт
+  resetForm();
+});
+
+// Обработчик события для закрытия попапа карточки
+buttonClosePopupCell.addEventListener('click', () => {
+  closePopup(popupContentCell);
 });
 
 const formCreateCell = document.querySelector('[name="elements-form"]');
@@ -112,11 +130,6 @@ buttonClosePreview.addEventListener('click', () => {
   closePopup(popupContentPreview);
 });
 
-// Обработчик события для закрытия попапа превью через Esc
-document.addEventListener('keydown', (event) => {
-  closePopupOnEsc(event, popupContentPreview);
-});
-
 // ----- Попап редактирования профиля ПР#4 ----- //
 const buttonPopupOpen = document.querySelector('.profile__popup-open');
 const popupProfile = document.querySelector('.popup_content_profile');
@@ -132,7 +145,6 @@ function openProfilePopup() {
   openPopup(popupProfile);
   profileNameField.value = profileTitle.textContent;
   profileDescripField.value = profileParagraph.textContent;
-  validation.resetErrors(profileForm);
 }
 
 function closeProfilePopup() {
@@ -141,11 +153,6 @@ function closeProfilePopup() {
 
 buttonPopupOpen.addEventListener('click', openProfilePopup);
 profileCloseButton.addEventListener('click', closeProfilePopup);
-
-// Обработчик события для закрытия попапа профиля через Esc
-document.addEventListener('keydown', (event) => {
-  closePopupOnEsc(event, popupProfile);
-});
 
 profileForm.addEventListener('submit', (event) => {
   event.preventDefault();

@@ -1,12 +1,3 @@
-const validationSettings = {
-  formSelector: '.popup__profile-form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  activeButtonClass: 'popup__save-button_valid',
-  inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__error_visible'
-};
-
 const templateItem = document.querySelector('.template-cell');
 const elementsItem = document.querySelector('.elements__cards');
 
@@ -54,11 +45,6 @@ const buttonClosePopupCell = document.querySelector('.button_close_cell');
 const openPopup = (popupToOpen) => {
   popupToOpen.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscKeydown); // обработчик события для Esc
-
-  const formElement = popupToOpen.querySelector(validationSettings.formSelector);
-  if (formElement) {
-    enableValidation(validationSettings);
-  }
 };
 
 const closePopup = (popupToClose) => {
@@ -81,10 +67,11 @@ function resetForm() {
   inputLinkCell.value = '';
 }
 
-// Обработчик события для открытия попапа
+// Обработчик события для открытия попапа создания карточки + удалить ошибки валидации
 buttonAddNewCell.addEventListener('click', () => {
   openPopup(popupContentCell);
   resetForm();
+  resetValidationErrorsIfOpen(formCreateCell, validationSettings);
 });
 
 // Обработчик события для закрытия попапа карточки
@@ -151,9 +138,15 @@ function closeProfilePopup() {
   closePopup(popupProfile);
 }
 
-buttonPopupOpen.addEventListener('click', openProfilePopup);
+//обработчик открыть попап редактировать профиль + скрыть ошибки валидации
+buttonPopupOpen.addEventListener('click', () => {
+  openProfilePopup();
+  resetValidationErrorsIfOpen(profileForm, validationSettings);
+});
+
 profileCloseButton.addEventListener('click', closeProfilePopup);
 
+// слушатель события для сабмита формы сохранения профиля
 profileForm.addEventListener('submit', (event) => {
   event.preventDefault();
   profileTitle.textContent = profileNameField.value;

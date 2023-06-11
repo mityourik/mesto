@@ -3,7 +3,7 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 22px;
-    background: none;
+    background: #000;
     text-align: center;
     border-radius: 2px;
     width: 358px;
@@ -12,8 +12,8 @@
     transition: opacity 0.2s ease-in-out;
     border: 1px solid rgba(0, 0, 0, 0.2);
     height: 50px;
-    color: rgba(0, 0, 0, 0.2);
-    cursor: default;
+    color: #FFF;
+    cursor: pointer;
 }
 
 .popup__save-button:hover {

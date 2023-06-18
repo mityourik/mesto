@@ -1,3 +1,12 @@
+const validationSettings = {
+  formSelector: '.popup__profile-form',
+  inputSelector: '.popup__input',
+  errorClass: 'popup__error_visible',
+  inputErrorClass: 'popup__input_error',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_invalid'
+};
+
 // Функция для показа ошибки валидации
 function showInputError(formElement, inputElement, errorMessage, settings) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -67,3 +76,5 @@ function resetValidationErrorsIfOpen(form, settings) {
 }
 
 enableValidation(validationSettings);// вызов функции с настройками
+
+export { validationSettings, resetValidationErrorsIfOpen};

@@ -1,39 +1,14 @@
+import { Card } from "../scripts/card.js";
+import { initialCards } from "../scripts/cards.js";
+import { validationSettings, resetValidationErrorsIfOpen } from "../scripts/FormValidator.js";
+
 const templateItem = document.querySelector('.template-cell');
 const elementsItem = document.querySelector('.elements__cards');
 
-function renderNewCard(name, link) {
-  const cloneDefaultCard = templateItem.content.cloneNode(true);
-  const defaultCardImage = cloneDefaultCard.querySelector('.elements__photo');
-  const defaultCardName = cloneDefaultCard.querySelector('.elements__title');
-  const defaultCardLikeButton = cloneDefaultCard.querySelector('.elements__like-button');
-  const defaultCardTrashButton = cloneDefaultCard.querySelector('.elements__trash-button');
-  
-  defaultCardImage.src = link;
-  defaultCardImage.alt = 'Изображение ' + name;
-  defaultCardName.textContent = name;
-
-  defaultCardLikeButton.addEventListener('click', () => {
-    defaultCardLikeButton.classList.toggle('elements__like-image_enabled');
-  });
-
-  defaultCardTrashButton.addEventListener('click', () => {
-    const parentCard = defaultCardTrashButton.closest('.elements__cell');
-    parentCard.remove();
-  });
-
-  defaultCardImage.addEventListener('click', () => {
-    openPopup(popupContentPreview);
-    previewImage.src = link;
-    previewImage.alt = 'Изображение ' + name;
-    previewName.textContent = name;
-  });
-
-  return cloneDefaultCard;
-}
-
-// Проходимся по массиву карточек
-initialCards.forEach(function(card) {
-  const cardElement = renderNewCard(card.name, card.link);
+// Проходимся по массиву заданных карточек
+initialCards.forEach(function (card) {
+  const newCard = new Card(card, '.template-cell', openImagePopup);
+  const cardElement = newCard.generateCard();
   elementsItem.appendChild(cardElement);
 });
 
@@ -59,7 +34,7 @@ const handleEscKeydown = (event) => {
       closePopup(openedPopup);
     }
   }
-}
+};
 
 //функция для сброса значения полей инпута новой карточки
 function resetForm() {
@@ -83,23 +58,31 @@ const formCreateCell = document.querySelector('[name="elements-form"]');
 const inputNameCell = formCreateCell.querySelector('[name="elements_input_name"]');
 const inputLinkCell = formCreateCell.querySelector('[name="elements_input_link"]');
 
+// функция для создания пользовательской карточки
+function renderNewCard(name, link) {
+  const data = { name, link };
+  const newCard = new Card(data, '.template-cell', openImagePopup);
+  const cardElement = newCard.generateCard();
+  return cardElement;
+}
+
 formCreateCell.addEventListener('submit', (event) => {
   event.preventDefault();
   const name = inputNameCell.value;
   const link = inputLinkCell.value;
 
   // Создать новую карточку с использованием значений из полей формы
-  const newCard = renderNewCard(name, link);
+  const newCardElement = renderNewCard(name, link);
 
   // Добавить новую карточку в начало списка
-  elementsItem.prepend(newCard);
+  elementsItem.prepend(newCardElement);
 
   // Закрыть попап
   closePopup(popupContentCell);
 });
 
 // Закрытие попапов по клику в оверлей
-document.querySelectorAll('.popup').forEach(popup => {
+document.querySelectorAll('.popup').forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if (evt.target === evt.currentTarget) {
       closePopup(popup);
@@ -109,9 +92,18 @@ document.querySelectorAll('.popup').forEach(popup => {
 
 // Предпросмотр фото карточки во всплывающем окне
 const popupContentPreview = document.querySelector('.popup_content_preview');
-const previewImage = popupContentPreview.querySelector('.popup__image-preview');
-const previewName = popupContentPreview.querySelector('.popup__preview-name');
 const buttonClosePreview = document.querySelector('.button_close_preview');
+
+function openImagePopup(name, link) {
+  const previewImage = popupContentPreview.querySelector('.popup__image-preview');
+  const previewName = popupContentPreview.querySelector('.popup__preview-name');
+
+  previewImage.src = link;
+  previewImage.alt = 'Изображение ' + name;
+  previewName.textContent = name;
+
+  openPopup(popupContentPreview);
+}
 
 buttonClosePreview.addEventListener('click', () => {
   closePopup(popupContentPreview);

@@ -1,6 +1,6 @@
-import { Card } from "../scripts/Card.js";
-import { initialCards } from "../scripts/cards.js";
-import { FormValidator } from "../scripts/FormValidator.js";
+import { Card } from "./scripts/Card.js";
+import { initialCards } from "./scripts/cards.js";
+import { FormValidator } from "./scripts/FormValidator.js";
 
 //объект настроек для валидации форм
 const validationSettings = {

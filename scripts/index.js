@@ -30,6 +30,8 @@ const profileNameField = profileForm.querySelector('[name="profile-input_name"]'
 const profileDescripField = profileForm.querySelector('[name="profile-input_description"]');
 const profileTitle = document.querySelector('.profile__title');
 const profileParagraph = document.querySelector('.profile__paragraph');
+const previewImage = popupContentPreview.querySelector('.popup__image-preview');
+const previewName = popupContentPreview.querySelector('.popup__preview-name');
 let cellFormValidator;
 let profileFormValidator; 
 
@@ -107,9 +109,6 @@ document.querySelectorAll('.popup').forEach((popup) => {
 
 // Функция для превью фото карточки
 function openImagePopup(name, link) {
-  const previewImage = popupContentPreview.querySelector('.popup__image-preview');
-  const previewName = popupContentPreview.querySelector('.popup__preview-name');
-
   previewImage.src = link;
   previewImage.alt = 'Изображение ' + name;
   previewName.textContent = name;

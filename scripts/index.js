@@ -62,9 +62,9 @@ const handleEscKeydown = (event) => {
 
 // Обработчик события для открытия попапа создания карточки + удалить ошибки валидации
 buttonAddNewCell.addEventListener('click', () => {
-  cellFormValidator.resetValidation();
   openPopup(popupContentCell);
   formCreateCell.reset();
+  cellFormValidator.resetValidation();
 });
 
 // Обработчик события для закрытия попапа карточки

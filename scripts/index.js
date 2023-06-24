@@ -2,7 +2,7 @@ import { Card } from "./Card.js";
 import { initialCards } from "./cards.js";
 import { FormValidator } from "./FormValidator.js";
 
-//объект настроек для валидации форм
+// объект настроек для валидации форм
 const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -12,7 +12,7 @@ const validationSettings = {
   inactiveButtonClass: 'popup__save-button_invalid'
 };
 
-//объявление переменных
+// объявление переменных
 const elementsItem = document.querySelector('.elements__cards');
 const buttonAddNewCell = document.querySelector('.profile__add-icon');
 const popupContentCell = document.querySelector('.popup_content_cell');
@@ -32,8 +32,6 @@ const profileTitle = document.querySelector('.profile__title');
 const profileParagraph = document.querySelector('.profile__paragraph');
 const previewImage = popupContentPreview.querySelector('.popup__image-preview');
 const previewName = popupContentPreview.querySelector('.popup__preview-name');
-let cellFormValidator;
-let profileFormValidator; 
 
 // Перебор массива и добавление карточек initialCards в разметку с использованием нового класса
 initialCards.forEach(function (card) {
@@ -45,8 +43,6 @@ initialCards.forEach(function (card) {
 const openPopup = (popupToOpen) => {
   popupToOpen.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscKeydown); // обработчик события для Esc
-  cellFormValidator = new FormValidator(validationSettings, formCreateCell); // Присваивание значения переменной
-  cellFormValidator.enableValidation(); // включение валидации для формы formCreateCell
 };
 
 const closePopup = (popupToClose) => {
@@ -66,6 +62,7 @@ const handleEscKeydown = (event) => {
 
 // Обработчик события для открытия попапа создания карточки + удалить ошибки валидации
 buttonAddNewCell.addEventListener('click', () => {
+  cellFormValidator.resetValidation();
   openPopup(popupContentCell);
   formCreateCell.reset();
 });
@@ -126,8 +123,6 @@ function openProfilePopup() {
   openPopup(popupProfile);
   profileNameField.value = profileTitle.textContent;
   profileDescripField.value = profileParagraph.textContent;
-  profileFormValidator = new FormValidator(validationSettings, profileForm); // Присваивание значения переменной
-  profileFormValidator.enableValidation();// включение валидации для формы profileForm
 }
 
 function closeProfilePopup() {
@@ -136,6 +131,7 @@ function closeProfilePopup() {
 
 //обработчики открыть-закрыть окно редактирования профиля
 buttonPopupOpen.addEventListener('click', () => {
+  profileFormValidator.resetValidation();
   openProfilePopup();
 });
 
@@ -148,3 +144,10 @@ profileForm.addEventListener('submit', (event) => {
   profileParagraph.textContent = profileDescripField.value;
   closeProfilePopup();
 });
+
+// Для каждой проверяемой формы создаем экземпляр нового класса 
+const cellFormValidator = new FormValidator(validationSettings, formCreateCell);
+cellFormValidator.enableValidation();
+
+const profileFormValidator = new FormValidator(validationSettings, profileForm);
+profileFormValidator.enableValidation(); 

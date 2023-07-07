@@ -15,10 +15,10 @@
         </header>
         <main class="main">
             <section class="profile">
-                <img src="./images/profile__avatar-image.jpg" alt="Аватар Жак-Ив Кусто" class="profile__image">
-                <h1 class="profile__title">Жак-Ив Кусто</h1>
-                <p class="profile__paragraph">Исследователь океана</p>
-                <button class="button profile__edit-button profile__popup-open" type="button" aria-label=" Кнопка Редактировать профиль"></button>
+                <img src="./images/profile__avatar.jpg" alt="Аватар места" class="profile__image">
+                <h1 class="profile__title">Дом</h1>
+                <p class="profile__paragraph">Коллекция фоток питомцев</p>
+                <button class="button profile__edit-button profile__popup-open" type="button" aria-label="Кнопка Редактировать профиль"></button>
                 <button class="button profile__add-icon" type="button" aria-label="Кнопка Добавить профиль"></button>
             </section>
             <section class="elements">
@@ -34,9 +34,9 @@
                 <button class="button popup__close-button" type="button" aria-label="Кнопка Закрыть окно"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__profile-form" name="profile-form" novalidate>
-                    <input id="name-profile" class="popup__input" type="text" name="profile-input_name" placeholder="Напиши имя путешественника" minlength="2" maxlength="30" required>
+                    <input id="name-profile" class="popup__input" type="text" name="profile-input_name" placeholder="Напиши имя" minlength="2" maxlength="30" required>
                     <span id="name-profile-error" class="popup__error"></span>
-                    <input id="description-profile" class="popup__input" type="text" name="profile-input_description" placeholder="Сюда - описание путешественника" minlength="2" maxlength="30" required>
+                    <input id="description-profile" class="popup__input" type="text" name="profile-input_description" placeholder="Сюда - название коллекции" minlength="2" maxlength="30" required>
                     <span id="description-profile-error" class="popup__error"></span>
                     <button class="button popup__save-button" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
                 </form>
@@ -47,7 +47,7 @@
                 <button class="button popup__close-button button_close_cell" type="button" aria-label="Кнопка Закрыть окно"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__profile-form popup__profile-form_content_cell" name="elements-form" novalidate>
-                    <input id="name-card" class="popup__input" type="text" name="elements_input_name" placeholder="Введите название путешествия" minlength="2" maxlength="30" required>
+                    <input id="name-card" class="popup__input" type="text" name="elements_input_name" placeholder="Введите имя питомца" minlength="2" maxlength="30" required>
                     <span id="name-card-error" class="popup__error"></span>
                     <input id="input-link" class="popup__input" type="url" name="elements_input_link" placeholder="Введите адрес картинки" required>
                     <span id="input-link-error" class="popup__error"></span>

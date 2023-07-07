@@ -1,6 +1,10 @@
 import { Card } from "./Card.js";
 import { initialCards } from "./cards.js";
 import { FormValidator } from "./FormValidator.js";
+import { Section } from "./Section.js";
+import { PopupWithForm } from "./PopupWithForm.js";
+import { PopupWithImage } from "./PopupWithImage.js";
+import { UserInfo } from "./UserInfo.js";
 
 // объект настроек для валидации форм
 const validationSettings = {
@@ -11,143 +15,105 @@ const validationSettings = {
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_invalid'
 };
+// переменные
+const editProfileForm = document.querySelector('[name="profile-form"]');
 
-// объявление переменных
-const elementsItem = document.querySelector('.elements__cards');
-const buttonAddNewCell = document.querySelector('.profile__add-icon');
-const popupContentCell = document.querySelector('.popup_content_cell');
-const buttonClosePopupCell = document.querySelector('.button_close_cell');
-const formCreateCell = document.querySelector('[name="elements-form"]');
-const inputNameCell = formCreateCell.querySelector('[name="elements_input_name"]');
-const inputLinkCell = formCreateCell.querySelector('[name="elements_input_link"]');
-const popupContentPreview = document.querySelector('.popup_content_preview');
-const buttonClosePreview = document.querySelector('.button_close_preview');
-const buttonPopupOpen = document.querySelector('.profile__popup-open');
-const popupProfile = document.querySelector('.popup_content_profile');
-const profileCloseButton = popupProfile.querySelector('.popup__close-button');
-const profileForm = document.querySelector('[name="profile-form"]');
-const profileNameField = profileForm.querySelector('[name="profile-input_name"]');
-const profileDescripField = profileForm.querySelector('[name="profile-input_description"]');
-const profileTitle = document.querySelector('.profile__title');
-const profileParagraph = document.querySelector('.profile__paragraph');
-const previewImage = popupContentPreview.querySelector('.popup__image-preview');
-const previewName = popupContentPreview.querySelector('.popup__preview-name');
+//----------------------------------- редактирование профиля
 
-// Перебор массива и добавление карточек initialCards в разметку с использованием нового класса
-initialCards.forEach(function (card) {
-  const newCardElement = renderNewCard(card.name, card.link); // Использование функции renderNewCard()
-  elementsItem.appendChild(newCardElement);
+// переменная кнопки редактировать профиль
+const editProfileButton = document.querySelector('.profile__edit-button');
+
+//экземпляр класса для валидации
+const editProfileFormValidator = new FormValidator(validationSettings, editProfileForm);
+
+// экземпляр класса UserInfo
+const userInfo = new UserInfo({
+  nameSelector: '.profile__title',
+  descriptionSelector: '.profile__paragraph'
 });
 
-// функции открытия-закрытия попапов
-const openPopup = (popupToOpen) => {
-  popupToOpen.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscKeydown); // обработчик события для Esc
-};
+// экземпляр класса PopupWithForm для попапа профиля
+const editProfilePopup = new PopupWithForm('.popup_content_profile', {
+  submitHandler: (formData) => {
+    const name = formData['profile-input_name'];
+    const info = formData['profile-input_description'];
+    userInfo.setUserInfo({ name, info }); //сохраняем данные в разметку
+    editProfilePopup.close();
+  },
+  formValidator: editProfileFormValidator
+});
 
-const closePopup = (popupToClose) => {
-  popupToClose.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscKeydown); // удалил обработчик события для Esc
-};
+// начальные значения полей ввода из разметки
+const initialData = userInfo.getUserInfo();
+editProfilePopup.setInitialValues(initialData);
 
-//логика для закрытия через esc
-const handleEscKeydown = (event) => {
-  if (event.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    if (openedPopup) {
-      closePopup(openedPopup);
+// слушатель клика на кнопку редактирования профиля
+editProfileButton.addEventListener('click', () => {
+  editProfileFormValidator.resetValidation();// сброс ошибок 
+  editProfilePopup.open();
+});
+
+// обработчики событий
+editProfilePopup.setEventListeners();
+
+//-------------------------------------------- карточки
+
+const popupContentPreview = new PopupWithImage('.popup_content_preview');
+
+popupContentPreview.setEventListeners();
+
+const addNewCardButton = document.querySelector('.profile__add-icon');
+
+// переменная для формы новой карточки
+const addCardForm = document.querySelector('[name="elements-form"]');
+
+// экземпляр для валидации
+const addCardFormValidator = new FormValidator(validationSettings, addCardForm);
+
+// слушаетль открыть попап новой карточки
+addNewCardButton.addEventListener('click', () => {
+  addCardFormValidator.resetValidation();
+  popupContentCell.open();
+})
+
+// функция создания новой карточки через класс
+function createCard(data) {
+  const card = new Card({
+    data: data,
+    templateSelector: '.template-cell',
+    handleCardClick: () => {// обработчик клика по карточке для просмотра
+      popupContentPreview.open(data);
     }
-  }
-};
+  });
 
-// Обработчик события для открытия попапа создания карточки + удалить ошибки валидации
-buttonAddNewCell.addEventListener('click', () => {
-  openPopup(popupContentCell);
-  formCreateCell.reset();
-  cellFormValidator.resetValidation();
-});
-
-// Обработчик события для закрытия попапа карточки
-buttonClosePopupCell.addEventListener('click', () => {
-  closePopup(popupContentCell);
-});
-
-// функция для создания пользовательской карточки
-function renderNewCard(name, link) {
-  const data = { name, link };
-  const newCard = new Card(data, '.template-cell', openImagePopup);
-  const cardElement = newCard.generateCard();
+  const cardElement = card.generateCard();
   return cardElement;
 }
 
-formCreateCell.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const name = inputNameCell.value;
-  const link = inputLinkCell.value;
+// экземпляр класса Section
+const cardList = new Section({
+  renderer: (item) => {// создание новой карточки при рендеринге
+    const cardElement = createCard(item);
+    cardList.addItem(cardElement);
+  }
+}, '.elements__cards');
 
-  // Создать новую карточку с использованием значений из полей формы
-  const newCardElement = renderNewCard(name, link);
+// Добавить карточки из массива
+cardList.renderItems(initialCards);
 
-  // Добавить новую карточку в начало списка
-  elementsItem.prepend(newCardElement);
-
-  // Закрыть попап
-  closePopup(popupContentCell);
+// Экземпляр класса PopupWithForm для создания карточки
+const popupContentCell = new PopupWithForm('.popup_content_cell', {
+  submitHandler: (formData) => {//обработчик сабмита формы
+    const cardData = {
+      name: formData['elements_input_name'],
+      link: formData['elements_input_link']
+    };
+    const newCardElement = createCard(cardData);
+    cardList.addItem(newCardElement);
+    editProfilePopup.close();
+  },
+  formValidator: addCardFormValidator
 });
 
-// Закрытие попапов по клику в оверлей
-document.querySelectorAll('.popup').forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target === evt.currentTarget) {
-      closePopup(popup);
-    }
-  });
-});
-
-// Функция для превью фото карточки
-function openImagePopup(name, link) {
-  previewImage.src = link;
-  previewImage.alt = 'Изображение ' + name;
-  previewName.textContent = name;
-
-  openPopup(popupContentPreview);
-}
-
-//слушатель для закрывания при клике по крестику попапа превью
-buttonClosePreview.addEventListener('click', () => {
-  closePopup(popupContentPreview);
-});
-
-// функции для открытия-закрытия окна редактирования профиля
-function openProfilePopup() {
-  openPopup(popupProfile);
-  profileNameField.value = profileTitle.textContent;
-  profileDescripField.value = profileParagraph.textContent;
-}
-
-function closeProfilePopup() {
-  closePopup(popupProfile);
-}
-
-//обработчики открыть-закрыть окно редактирования профиля
-buttonPopupOpen.addEventListener('click', () => {
-  profileFormValidator.resetValidation();
-  openProfilePopup();
-});
-
-profileCloseButton.addEventListener('click', closeProfilePopup);
-
-// слушатель события для сабмита формы сохранения профиля
-profileForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  profileTitle.textContent = profileNameField.value;
-  profileParagraph.textContent = profileDescripField.value;
-  closeProfilePopup();
-});
-
-// Для каждой проверяемой формы создаем экземпляр нового класса 
-const cellFormValidator = new FormValidator(validationSettings, formCreateCell);
-cellFormValidator.enableValidation();
-
-const profileFormValidator = new FormValidator(validationSettings, profileForm);
-profileFormValidator.enableValidation(); 
+// Слушатели
+popupContentCell.setEventListeners();

@@ -41,3 +41,13 @@ export const initialCards = [
       link: 'https://i.postimg.cc/zBp2DkBb/a0a399e3-72a8-4f18-8bbe-84a873954eac.jpg'
     }
 ];
+
+// объект настроек для валидации форм
+export const validationSettings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    errorClass: 'popup__error_visible',
+    inputErrorClass: 'popup__input_error',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_invalid'
+  };

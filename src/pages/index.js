@@ -1,29 +1,21 @@
-import { Card } from "./Card.js";
-import { initialCards } from "./cards.js";
-import { FormValidator } from "./FormValidator.js";
-import { Section } from "./Section.js";
-import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { UserInfo } from "./UserInfo.js";
+import { Card } from "../components/Card.js";
+import { initialCards, validationSettings } from "../utils/utils.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
 
-// объект настроек для валидации форм
-const validationSettings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  errorClass: 'popup__error_visible',
-  inputErrorClass: 'popup__input_error',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_invalid'
-};
-// переменные
-const editProfileForm = document.querySelector('[name="profile-form"]');
+// переменные для профиля
+const editProfileButton = document.querySelector('.profile__edit-button');//для слушателя открытия попапа профиля
+const editProfileForm = document.querySelector('[name="profile-form"]');//форма попапа профиля для валидации
+// переменные для карточек
+const addNewCardButton = document.querySelector('.profile__add-icon');// для открытия попапа  карточки
+const addCardForm = document.querySelector('[name="elements-form"]');// для формы новой карточки для валидации
 
-//----------------------------------- редактирование профиля
+//----------------------- редактирование профиля-------------------//
 
-// переменная кнопки редактировать профиль
-const editProfileButton = document.querySelector('.profile__edit-button');
-
-//экземпляр класса для валидации
+//экземпляр класса для валидации формы профиля
 const editProfileFormValidator = new FormValidator(validationSettings, editProfileForm);
 
 // экземпляр класса UserInfo
@@ -53,26 +45,22 @@ editProfileButton.addEventListener('click', () => {
   editProfilePopup.open();
 });
 
-// обработчики событий
+// обработчики
 editProfilePopup.setEventListeners();
 
-//-------------------------------------------- карточки
+//---------------------------карточки----------------------------//
 
+//экземпляр попапа превью для обработчика клика
 const popupContentPreview = new PopupWithImage('.popup_content_preview');
 
 popupContentPreview.setEventListeners();
-
-const addNewCardButton = document.querySelector('.profile__add-icon');
-
-// переменная для формы новой карточки
-const addCardForm = document.querySelector('[name="elements-form"]');
 
 // экземпляр для валидации
 const addCardFormValidator = new FormValidator(validationSettings, addCardForm);
 
 // слушаетль открыть попап новой карточки
 addNewCardButton.addEventListener('click', () => {
-  addCardFormValidator.resetValidation();
+  addCardFormValidator.resetValidation();//сброс ошибок валидации
   popupContentCell.open();
 })
 

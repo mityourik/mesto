@@ -59,15 +59,17 @@ export class FormValidator {
         this._toggleButtonState(); // изменить состояние кнопки отправки
       });
     });
+  
+    this._formElement.addEventListener('submit', (event) => {
+      event.preventDefault(); // отменить отправку
+    });
+  
     this._toggleButtonState(); // изначально установить состояние кнопки отправки
   }
 
   // Включение валидации формы
   enableValidation() {
-    this._formElement.addEventListener('submit', (event) => {
-      event.preventDefault(); // отменить отправку
-    });
+    this._setEventListeners(); // установить обработчики событий на поля ввода и слушателя события submit
     this.resetValidation(); // сбросить состояние формы валидации
-    this._setEventListeners(); // установить обработчики событий на поля ввода
   }
 }

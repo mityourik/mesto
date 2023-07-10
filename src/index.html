@@ -15,8 +15,8 @@
         <main class="main">
             <section class="profile">
                 <img src="<%=require('./images/profile__avatar.png')%>" alt="Аватар места" class="profile__image">
-                <h1 class="profile__title">Моя семья</h1>
-                <p class="profile__paragraph">Коллекция фоток питомцев</p>
+                <h1 class="profile__title">владимир запутин</h1>
+                <p class="profile__paragraph">Исследователь дна</p>
                 <button class="button profile__edit-button profile__popup-open" type="button" aria-label="Кнопка Редактировать профиль"></button>
                 <button class="button profile__add-icon" type="button" aria-label="Кнопка Добавить профиль"></button>
             </section>
@@ -33,9 +33,9 @@
                 <button class="button popup__close-button" type="button" aria-label="Кнопка Закрыть окно"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__profile-form" name="profile-form" novalidate>
-                    <input id="name-profile" class="popup__input" type="text" name="profile-input_name" placeholder="Напиши имя" minlength="2" maxlength="30" required>
+                    <input id="name-profile" class="popup__input" type="text" name="profile-input_name" placeholder="Имя" minlength="2" maxlength="30" required>
                     <span id="name-profile-error" class="popup__error"></span>
-                    <input id="description-profile" class="popup__input" type="text" name="profile-input_description" placeholder="Сюда - название коллекции" minlength="2" maxlength="30" required>
+                    <input id="description-profile" class="popup__input" type="text" name="profile-input_description" placeholder="О себе" minlength="2" maxlength="40" required>
                     <span id="description-profile-error" class="popup__error"></span>
                     <button class="button popup__save-button" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
                 </form>

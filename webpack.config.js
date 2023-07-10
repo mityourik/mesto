@@ -3,6 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -26,6 +27,7 @@ const config = {
         }),
 
         new MiniCssExtractPlugin(),
+        new CleanWebpackPlugin(),
 
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
@@ -46,14 +48,14 @@ const config = {
                 }, 'postcss-loader'],
             },
             {
-                test: /\.(eot|svg|png|jpg|gif)$/i,
+                test: /\.(svg|png|jpg|gif)$/i,
                 type: 'asset',
                 generator: {
                     filename: 'images/[name]_[hash][ext]',
                 }
             },
             {
-                test: /\.(ttf|woff|woff2)$/i,
+                test: /\.(eot|ttf|woff|woff2)$/i,
                 type: 'asset',
                 generator: {
                     filename: 'fonts/[name]_[hash][ext]',

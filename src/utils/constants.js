@@ -51,3 +51,16 @@ export const validationSettings = {
     submitButtonSelector: '.popup__save-button',
     inactiveButtonClass: 'popup__save-button_invalid'
   };
+
+//селекторы попапов
+export const popupTypeSelector = {// поместить в utils
+  popupContentProfile: '.popup_content_profile',
+  popupContentPreview: '.popup_content_preview',
+  popupContentCell: '.popup_content_cell'
+};
+
+//селекторы для настроек редактирования профиля
+export const profileConfig = {//поместить в utils
+  profileTitle: '.profile__title',
+  profileParagraph: '.profile__paragraph'
+};

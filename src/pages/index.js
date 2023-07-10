@@ -1,109 +1,108 @@
 import './index.css';
 
 import { Card } from "../components/Card.js";
-import { initialCards, validationSettings } from "../utils/utils.js";
+import { initialCards, validationSettings, popupTypeSelector, profileConfig } from "../utils/constants.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 
-// переменные для профиля
-const editProfileButton = document.querySelector('.profile__edit-button');//для слушателя открытия попапа профиля
-const editProfileForm = document.querySelector('[name="profile-form"]');//форма попапа профиля для валидации
-// переменные для карточек
-const addNewCardButton = document.querySelector('.profile__add-icon');// для открытия попапа  карточки
-const addCardForm = document.querySelector('[name="elements-form"]');// для формы новой карточки для валидации
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> профиль
 
-//----------------------- редактирование профиля-------------------//
+// Получаем необходимые элементы DOM
+const editProfileButton = document.querySelector('.profile__edit-button');//для открытия попа профиля
+const nameInputElement = document.querySelector('[name="profile-input_name"]');//для подстановки дефолт данных
+const descrInputElement = document.querySelector('[name="profile-input_description"]');//для подстановки дефолт данных
 
-//экземпляр класса для валидации формы профиля
-const editProfileFormValidator = new FormValidator(validationSettings, editProfileForm);
-
-// экземпляр класса UserInfo
+// Создаем экземпляр класса UserInfo и передаем настройки
 const userInfo = new UserInfo({
-  nameSelector: '.profile__title',
-  descriptionSelector: '.profile__paragraph'
+  nameSelector: profileConfig.profileTitle,
+  descriptionSelector: profileConfig.profileParagraph
 });
 
-// экземпляр класса PopupWithForm для попапа профиля
-const editProfilePopup = new PopupWithForm('.popup_content_profile', {
-  submitHandler: (formData) => {
-    const name = formData['profile-input_name'];
-    const info = formData['profile-input_description'];
-    userInfo.setUserInfo({ name, info }); //сохраняем данные в разметку
-    editProfilePopup.close();
-  },
-  formValidator: editProfileFormValidator
+// Создаем экземпляр класса PopupWithForm для редактирования профиля
+const editProfilePopup = new PopupWithForm({
+  popupSelector: popupTypeSelector.popupContentProfile,
+  submitHandler: (dataInfo) => {
+    const name = nameInputElement.value;//ставим значения из разметки
+    const info = descrInputElement.value;
+    userInfo.setUserInfo({ name, info });
+  }
 });
 
-// начальные значения полей ввода из разметки
-const initialData = userInfo.getUserInfo();
-editProfilePopup.setInitialValues(initialData);
-
-// слушатель клика на кнопку редактирования профиля
+// Слушатель клика на кнопку редактирования профиля
 editProfileButton.addEventListener('click', () => {
-  editProfileFormValidator.resetValidation();// сброс ошибок 
+  const defaultUserInfo = userInfo.getUserInfo();
+  nameInputElement.value = defaultUserInfo.name;
+  descrInputElement.value = defaultUserInfo.info;
+  editProfileValidator.resetValidation();
   editProfilePopup.open();
 });
 
-// обработчики
+// Добавляем обработчики событий
 editProfilePopup.setEventListeners();
 
-//---------------------------карточки----------------------------//
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> карточки
 
-//экземпляр попапа превью для обработчика клика
-const popupContentPreview = new PopupWithImage('.popup_content_preview');
+// Получаем необходимый DOM для клика по кнопке новой карточки
+const addNewCardButton = document.querySelector('.profile__add-icon');
 
+// Создаем экземпляр попапа превью и передаем слушатели
+const popupContentPreview = new PopupWithImage(popupTypeSelector.popupContentPreview);
 popupContentPreview.setEventListeners();
 
-// экземпляр для валидации
-const addCardFormValidator = new FormValidator(validationSettings, addCardForm);
-
-// слушаетль открыть попап новой карточки
+// открыть попап новой карточки
 addNewCardButton.addEventListener('click', () => {
-  addCardFormValidator.resetValidation();//сброс ошибок валидации
+  addNewCardValidator.resetValidation();
   popupContentCell.open();
 })
 
-// функция создания новой карточки через класс
+// Создание новой карточки
 function createCard(data) {
   const card = new Card({
     data: data,
     templateSelector: '.template-cell',
-    handleCardClick: () => {// обработчик клика по карточке для просмотра
-      popupContentPreview.open(data);
+    handleCardClick: (name, link) => {
+      popupContentPreview.open({ name, link });
     }
   });
-
-  const cardElement = card.generateCard();
-  return cardElement;
+  return card.generateCard();
 }
 
-// экземпляр класса Section
+// Создание экземпляра класса Section с карточкой
 const cardList = new Section({
-  renderer: (item) => {// создание новой карточки при рендеринге
+  renderer: (item) => {
     const cardElement = createCard(item);
     cardList.addItem(cardElement);
   }
 }, '.elements__cards');
 
-// Добавить карточки из массива
+// Добавление карточек в список
 cardList.renderItems(initialCards);
 
-// Экземпляр класса PopupWithForm для создания карточки
-const popupContentCell = new PopupWithForm('.popup_content_cell', {
-  submitHandler: (formData) => {//обработчик сабмита формы
+// Создание экземпляра класса PopupWithForm 
+const popupContentCell = new PopupWithForm({
+  popupSelector: popupTypeSelector.popupContentCell,
+  submitHandler: (formData) => {
     const cardData = {
       name: formData['elements_input_name'],
       link: formData['elements_input_link']
     };
     const newCardElement = createCard(cardData);
     cardList.addItem(newCardElement);
-    editProfilePopup.close();
-  },
-  formValidator: addCardFormValidator
+  }
 });
 
-// Слушатели
+// Добавление обработчиков событий и отображение попапа
 popupContentCell.setEventListeners();
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> валидация форм
+
+const formEditProfile = document.querySelector('[name="profile-form"]');
+const formAddNewCard = document.querySelector('[name="elements-form"]');
+
+const addNewCardValidator = new FormValidator(validationSettings, formAddNewCard);
+const editProfileValidator = new FormValidator(validationSettings, formEditProfile);
+addNewCardValidator.enableValidation();
+editProfileValidator.enableValidation();

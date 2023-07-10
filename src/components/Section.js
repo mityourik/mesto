@@ -1,16 +1,14 @@
 export class Section {
   constructor({ renderer }, containerSelector) {
-    this._renderer = renderer;//функция-рендерер для вызова при создании секции
-    this._container = document.querySelector(containerSelector);//контейнер, в который будут добавляться элементы
+    this._renderer = renderer;
+    this._container = document.querySelector(containerSelector);
   }
 
-  renderItems(items) {
-    items.forEach(item => {
-      this._renderer(item);//вызов функции-рендерер для каждого элемента в переданном массиве
-    });
+  renderItems(items) { 
+    items.forEach(this._renderer);//каждый элемент массива передан напрямую в _renderer
   }
 
   addItem(element) {
-    this._container.prepend(element);// добавляем элемент в начало контейнера
+    this._container.prepend(element);
   }
 }

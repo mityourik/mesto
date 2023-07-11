@@ -24,10 +24,10 @@ const userInfo = new UserInfo({
 // Создаем экземпляр класса PopupWithForm для редактирования профиля
 const editProfilePopup = new PopupWithForm({
   popupSelector: popupTypeSelector.popupContentProfile,
-  submitHandler: (dataInfo) => {
-    const name = nameInputElement.value;//ставим значения из разметки
-    const info = descrInputElement.value;
-    userInfo.setUserInfo({ name, info });
+  submitHandler: (formData) => { 
+    const name = formData['profile-input_name']; 
+    const info = formData['profile-input_description']; 
+    userInfo.setUserInfo({ name, info }); //сохраняем данные в разметку 
   }
 });
 

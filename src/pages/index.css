@@ -34,6 +34,7 @@
 @import url(../blocks/popup/__input/_error/popup__input_error.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__title/_content/popup__title_content_confirm.css);
+@import url(../blocks/popup/__title/_content/popup__title_content_avatar.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);/* note: create BEM folder*/
 @import url(../blocks/popup/__save-button/_invalid/popup__save-button_invalid.css);/* note: create BEM folder*/
 @import url(../blocks/popup/__error/popup__error.css);

@@ -1,0 +1,15 @@
+.profile__config {
+    background-image: url(../../../images/profile__pen.svg);
+    background-color: #000;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 120px;
+    grid-area: image;
+}
+
+@media screen and (max-width: 729px) {
+    .profile__config {
+        margin: 0 auto;
+    }
+}

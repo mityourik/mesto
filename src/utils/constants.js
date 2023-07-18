@@ -53,14 +53,24 @@ export const validationSettings = {
   };
 
 //селекторы попапов
-export const popupTypeSelector = {// поместить в utils
+export const popupTypeSelector = {
   popupContentProfile: '.popup_content_profile',
   popupContentPreview: '.popup_content_preview',
   popupContentCell: '.popup_content_cell'
 };
 
 //селекторы для настроек редактирования профиля
-export const profileConfig = {//поместить в utils
+export const profileConfig = {
   profileTitle: '.profile__title',
-  profileParagraph: '.profile__paragraph'
+  profileParagraph: '.profile__paragraph',
+  profileImage: '.profile__image'//добаил селектор ава АПИ
 };
+
+// API config для доступа
+export const apiConfig = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-71',
+  headers:{
+    'Content-Type': "application/json",
+    authorization: 'a2b723e3-a104-4268-8462-81c1140190b0'
+  }
+}

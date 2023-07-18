@@ -1,12 +1,39 @@
 import './index.css';
 
 import { Card } from "../components/Card.js";
-import { initialCards, validationSettings, popupTypeSelector, profileConfig } from "../utils/constants.js";
+import { initialCards, validationSettings, popupTypeSelector, profileConfig, apiConfig } from "../utils/constants.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
+import { Api } from '../components/Api.js';
+
+// Создаем экземпляр класса UserInfo и передаем настройки
+const userInfo = new UserInfo({
+  nameSelector: profileConfig.profileTitle,
+  descriptionSelector: profileConfig.profileParagraph,
+  selectorUserAvatar: profileConfig.profileImage
+});
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> API
+
+const api = new Api(apiConfig);//экз класса с конфиг
+
+// получение ответа для установки userInfo
+async function fetchAndSetUserInfo() {
+  try {
+    const [resUser] = await Promise.all([api.getUserInfoApi()]);//деструкт массива, чтобы получить getUserInfoApi в resUser
+    userInfo.setUserInfo(resUser);
+    userInfo.setUserAvatar(resUser);
+  } catch (err) {
+    //выводим сообщение об ошибке в консоль для отладки
+    console.error("Ошибка при получении данных:", err);
+  }
+}
+
+// Вызываем функцию для установки данных в профиль
+fetchAndSetUserInfo();
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> профиль
 
@@ -15,19 +42,13 @@ const editProfileButton = document.querySelector('.profile__edit-button');//дл
 const nameInputElement = document.querySelector('[name="profile-input_name"]');//для подстановки дефолт данных
 const descrInputElement = document.querySelector('[name="profile-input_description"]');//для подстановки дефолт данных
 
-// Создаем экземпляр класса UserInfo и передаем настройки
-const userInfo = new UserInfo({
-  nameSelector: profileConfig.profileTitle,
-  descriptionSelector: profileConfig.profileParagraph
-});
-
 // Создаем экземпляр класса PopupWithForm для редактирования профиля
 const editProfilePopup = new PopupWithForm({
   popupSelector: popupTypeSelector.popupContentProfile,
   submitHandler: (formData) => { 
     const name = formData['profile-input_name']; 
-    const info = formData['profile-input_description']; 
-    userInfo.setUserInfo({ name, info }); //сохраняем данные в разметку 
+    const about = formData['profile-input_description']; 
+    userInfo.setUserInfo({ name, about }); //сохраняем данные в разметку 
   }
 });
 
@@ -35,7 +56,7 @@ const editProfilePopup = new PopupWithForm({
 editProfileButton.addEventListener('click', () => {
   const defaultUserInfo = userInfo.getUserInfo();
   nameInputElement.value = defaultUserInfo.name;
-  descrInputElement.value = defaultUserInfo.info;
+  descrInputElement.value = defaultUserInfo.about;
   editProfileValidator.resetValidation();
   editProfilePopup.open();
 });

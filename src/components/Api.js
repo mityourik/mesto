@@ -33,4 +33,10 @@ export class Api {
             }),
         });
     }
+
+    async getInitialCards() {
+        return this._fetchData(`${this._url}/cards`, {
+          headers: { authorization: this._authorization }
+        });
+    }
 }

@@ -21,11 +21,13 @@ const userInfo = new UserInfo({
 const api = new Api(apiConfig);//экз класса с конфиг
 
 // получение ответа для установки userInfo
-async function fetchAndSetUserInfo() {
+async function getAndSetContentApi() {
   try {
-    const [resUser] = await Promise.all([api.getUserInfoApi()]);//деструкт массива, чтобы получить getUserInfoApi в resUser
+    const [resUser, resCard] = await Promise.all([api.getUserInfoApi(), api.getInitialCards()]);//деструкт массива, чтобы получить getUserInfoApi в resUser
+    const userCurrentId = resUser._id;
     userInfo.setUserInfo(resUser);
     userInfo.setUserAvatar(resUser);
+    cardList.renderItems(resCard, userCurrentId)
   } catch (err) {
     //выводим сообщение об ошибке в консоль для отладки
     console.error("Ошибка при получении данных:", err);
@@ -33,7 +35,7 @@ async function fetchAndSetUserInfo() {
 }
 
 // Вызываем функцию для установки данных в профиль
-fetchAndSetUserInfo();
+getAndSetContentApi();
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> профиль
 
@@ -99,8 +101,8 @@ const cardList = new Section({
   }
 }, '.elements__cards');
 
-// Добавление карточек в список
-cardList.renderItems(initialCards);
+// Добавление карточек в список ------------- удалить карточки!
+//cardList.renderItems(initialCards);
 
 // Создание экземпляра класса PopupWithForm 
 const popupContentCell = new PopupWithForm({

@@ -1,13 +1,14 @@
 import './index.css';
 
 import { Card } from "../components/Card.js";
-import { initialCards, validationSettings, popupTypeSelector, profileConfig, apiConfig } from "../utils/constants.js";
+import { validationSettings, popupTypeSelector, profileConfig, apiConfig } from "../utils/constants.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from '../components/Api.js';
+import { PopupWithQuestion } from '../components/PopupWithQuestion.js';
 
 // Создаем экземпляр класса UserInfo и передаем настройки
 const userInfo = new UserInfo({
@@ -17,25 +18,18 @@ const userInfo = new UserInfo({
 });
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> API
+let userCurrentId;
 
 const api = new Api(apiConfig);//экз класса с конфиг
 
-// получение ответа для установки userInfo
-async function getAndSetContentApi() {
-  try {
-    const [resUser, resCard] = await Promise.all([api.getUserInfoApi(), api.getInitialCards()]);//деструкт массива, чтобы получить getUserInfoApi в resUser
-    const userCurrentId = resUser._id;
-    userInfo.setUserInfo(resUser);
-    userInfo.setUserAvatar(resUser);
-    cardList.renderItems(resCard, userCurrentId)
-  } catch (err) {
-    //выводим сообщение об ошибке в консоль для отладки
-    console.error("Ошибка при получении данных:", err);
-  }
-}
-
-// Вызываем функцию для установки данных в профиль
-getAndSetContentApi();
+Promise.all([api.getUserInfoApi(), api.getInitialCards()])
+.then(([resUser, resCard]) => {
+  userCurrentId = resUser._id;
+  userInfo.setUserInfo(resUser);
+  userInfo.setUserAvatar(resUser);
+  cardList.renderItems(resCard, userCurrentId)
+})
+.catch((err) => alert(err))
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> профиль
 
@@ -81,30 +75,45 @@ addNewCardButton.addEventListener('click', () => {
   popupContentCell.open();
 })
 
-// Создание новой карточки
-function createCard(data) {
+// функция создания новой карточки
+function createCard(data, user) {
   const card = new Card({
     data: data,
+    userId: user,
     templateSelector: '.template-cell',
     handleCardClick: (name, link) => {
       popupContentPreview.open({ name, link });
+    },
+    handleCardDelete: (cardId, cardElement) => {
+      popupContentConfirm.open(cardId, cardElement);
+    },
+    handleCardLike: (cardId) => {
+      api.pushCardLike(cardId)
+        .then((res) => {
+          card.setLikesCount(res);
+        })
+        .catch((err) => alert(err))
+    },
+    handleLikeDelete: (cardId) => {
+      api.removeCardLike(cardId)
+        .then((res) => {
+        })
+        .catch((err) => alert(err))
     }
   });
+
   return card.generateCard();
 }
 
-// Создание экземпляра класса Section с карточкой
+// экз класса для отрисовки карточек
 const cardList = new Section({
-  renderer: (item) => {
-    const cardElement = createCard(item);
+  renderer: (item, user) => {
+    const cardElement = createCard(item, user);
     cardList.addItem(cardElement);
   }
 }, '.elements__cards');
 
-// Добавление карточек в список ------------- удалить карточки!
-//cardList.renderItems(initialCards);
-
-// Создание экземпляра класса PopupWithForm 
+// экз класса для создания новой карточки из попапа
 const popupContentCell = new PopupWithForm({
   popupSelector: popupTypeSelector.popupContentCell,
   submitHandler: (formData) => {
@@ -112,13 +121,38 @@ const popupContentCell = new PopupWithForm({
       name: formData['elements_input_name'],
       link: formData['elements_input_link']
     };
-    const newCardElement = createCard(cardData);
-    cardList.addItem(newCardElement);
+    popupContentCell.renderPreloader(true, 'Сохранение..');
+    api.putNewCard(cardData)
+    .then((newCard) => {
+      const newCardElement = createCard(newCard, userCurrentId);
+      cardList.addItem(newCardElement);
+    })
+    .catch((error) => {
+      console.error('Ошибка поста карты', error);
+    });
   }
 });
 
 // Добавление обработчиков событий и отображение попапа
 popupContentCell.setEventListeners();
+
+//попап подтверждения удаления
+const popupContentConfirm = new PopupWithQuestion('.popup_content_confirm', {
+  submitCallback: (id, card) => {
+    popupContentConfirm.renderPreloader(true, 'карточка всё...');
+    api.deleteCard(id)
+    then(() => {
+      card.deleteCard();
+      popupContentConfirm.close();
+    })
+    .catch((err) => alert(err))
+    .finally(() => {
+      popupContentConfirm.renderPreloader(false);
+    })
+  }
+})
+
+popupContentConfirm.setEventListeners();
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> валидация форм
 

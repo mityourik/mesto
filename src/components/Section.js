@@ -4,8 +4,10 @@ export class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  renderItems(items) { 
-    items.forEach(this._renderer);//каждый элемент массива передан напрямую в _renderer
+  renderItems(items, user) {// проверить
+    items.forEach(item => {
+      this._renderer(item, user);
+    });
   }
 
   addItem(element) {

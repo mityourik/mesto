@@ -5,7 +5,8 @@ export class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitHandler = submitHandler;
     this._form = this._popup.querySelector('.popup__profile-form');
-    this._inputList = Array.from(this._form.querySelectorAll('.popup__input')); // находим список всех инпутов в форме
+    this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
+    this._buttonSubmit = this._form.querySelector('[name="elements_submit_button"]');
   }
 
   _getInputValues() {
@@ -14,6 +15,16 @@ export class PopupWithForm extends Popup {
       formValues[input.name] = input.value;
     });
     return formValues;
+  }
+
+  renderPreloader(loading, displayText) {
+    if (!this._buttonSubmit) return;
+    if (loading) {
+      this.defaulText = this._buttonSubmit.textContent;
+      this._buttonSubmit.textContent = displayText;
+    } else {
+      this._buttonSubmit.textContent = this.defaulText;
+    }
   }
 
   setEventListeners() {

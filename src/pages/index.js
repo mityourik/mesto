@@ -7,7 +7,7 @@ import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
-import { Api } from '../components/Api.js';
+import { Api } from '../components/API.js';
 import { PopupWithQuestion } from '../components/PopupWithQuestion.js';
 
 // Создаем экземпляр класса UserInfo и передаем настройки
@@ -38,13 +38,22 @@ const editProfileButton = document.querySelector('.profile__edit-button');//дл
 const nameInputElement = document.querySelector('[name="profile-input_name"]');//для подстановки дефолт данных
 const descrInputElement = document.querySelector('[name="profile-input_description"]');//для подстановки дефолт данных
 
-// Создаем экземпляр класса PopupWithForm для редактирования профиля
+// экз класса PopupWithForm для установки userInfoApi
 const editProfilePopup = new PopupWithForm({
   popupSelector: popupTypeSelector.popupContentProfile,
   submitHandler: (formData) => { 
     const name = formData['profile-input_name']; 
-    const about = formData['profile-input_description']; 
-    userInfo.setUserInfo({ name, about }); //сохраняем данные в разметку 
+    const about = formData['profile-input_description'];
+    editProfilePopup.renderPreloader(true, 'Сохранение...');
+    api.setUserInfoApi({ name, about })
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      editProfilePopup.close();
+    })
+    .catch((err) => alert(err))
+    .finally(() => {
+      editProfilePopup.renderPreloader(false);
+    }) 
   }
 });
 
@@ -141,7 +150,7 @@ const popupContentConfirm = new PopupWithQuestion('.popup_content_confirm', {
   submitCallback: (id, card) => {
     popupContentConfirm.renderPreloader(true, 'карточка всё...');
     api.deleteCard(id)
-    then(() => {
+    .then(() => {
       card.deleteCard();
       popupContentConfirm.close();
     })

@@ -1,7 +1,7 @@
 export class Popup {
   constructor(popupSelector) {
-    this._popup = document.querySelector(popupSelector);//DOM-элемент попапа, заданный по селектору
-    this._handleEscClose = this._handleEscClose.bind(this);//привязываем контекст метода к экземпляру класса
+    this._popup = document.querySelector(popupSelector);
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
@@ -11,7 +11,7 @@ export class Popup {
 
   close() {
     this._popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', this._handleEscClose);//удаляем обработчик события клавиши Esc
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 
   _handleEscClose(event) {
@@ -20,14 +20,14 @@ export class Popup {
     }
   }
 
-  setEventListeners() {// закрыть попап при клике на кнопку или вне области попапа
-    this._popup.addEventListener('click', (event) => {
-      if (
-        event.target.classList.contains('popup__close-button') ||
-        event.target.classList.contains('popup')
-      ) {
-        this.close();
-      }
-    });
+  _handleOverlayClick(event) {
+    if (event.target.classList.contains('popup')) {
+      this.close();
+    }
+  }
+
+  setEventListeners() {
+    this._popup.addEventListener('click', this._handleOverlayClick.bind(this));
+    this._popup.querySelector('.popup__close-button').addEventListener('click', () => this.close());
   }
 }

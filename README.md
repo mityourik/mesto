@@ -1,5 +1,5 @@
 <div align="left">
-  <img src="https://i.postimg.cc/j5hf9DJS/image-png.png" alt="Logo" width="200" height="200">
+  <img src="https://i.postimg.cc/j5hf9DJS/image-png.png" alt="Logo" width="300" height="300">
 </div>
 
 <h1 align="center">Проектная работа: Mesto. Девятый спринт</h1>

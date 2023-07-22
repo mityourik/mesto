@@ -17,7 +17,7 @@ export class UserInfo {
     this._descriptionElement.textContent = about;
   }
 
-  setUserAvatar(url) {
-    this._profileAvatar.src = url.avatar
-  }
+  setUserAvatar(newInfo) {//метод для установки картинки аватара
+    this._profileAvatar.src = newInfo.avatar;
+  }  
 }

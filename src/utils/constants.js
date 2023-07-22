@@ -12,7 +12,9 @@ export const validationSettings = {
 export const popupTypeSelector = {
   popupContentProfile: '.popup_content_profile',
   popupContentPreview: '.popup_content_preview',
-  popupContentCell: '.popup_content_cell'
+  popupContentCell: '.popup_content_cell',
+  popupContentAvatar: '.popup_content_avatar',
+  popupContentConfirm: '.popup_content_confirm'
 };
 
 //селекторы для настроек редактирования профиля

@@ -210,6 +210,10 @@ const editProfileValidator = new FormValidator(validationSettings, formEditProfi
 editProfileButton.addEventListener('click', handleEditProfileButtonClick);
 addNewCardButton.addEventListener('click', handleAddNewCardButtonClick);
 editAvatarButton.addEventListener('click', handleEditAvatarButtonClick);
+
+popupEditAvatar.setEventListeners();
+editProfilePopup.setEventListeners();
+popupContentCell.setEventListeners();
 popupContentPreview.setEventListeners();
 popupContentConfirm.setEventListeners();
 

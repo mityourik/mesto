@@ -97,7 +97,6 @@ export class Card {
   
     // Проверка, если текущий пользователь уже лайкнул карточку
     const isLikedByCurrentUser = this._likes.some(user => user._id === this._userId);
-    
     if (isLikedByCurrentUser) {
       this._likeButton.classList.add('elements__like-image_enabled');
     }

@@ -69,6 +69,5 @@ export class FormValidator {
   // Включение валидации формы
   enableValidation() {
     this._setEventListeners();
-    this.resetValidation();
   }
 }

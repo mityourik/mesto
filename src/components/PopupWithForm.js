@@ -7,6 +7,7 @@ export class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.popup__profile-form');
     this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
     this._buttonSubmit = this._form.querySelector('.popup__save-button');
+    this._defaultText = this._buttonSubmit.textContent;
   }
 
   _getInputValues() {
@@ -18,12 +19,10 @@ export class PopupWithForm extends Popup {
   }
 
   renderPreloader(loading, displayText) {
-    if (!this._buttonSubmit) return;
     if (loading) {
-      this.defaulText = this._buttonSubmit.textContent;
       this._buttonSubmit.textContent = displayText;
     } else {
-      this._buttonSubmit.textContent = this.defaulText;
+      this._buttonSubmit.textContent = this._defaultText;
     }
   }
 
@@ -38,7 +37,7 @@ export class PopupWithForm extends Popup {
         }
       })
       .catch((error) => {
-        console.error('Ошибка обновления данных', error);
+        console.error('лол', error);
       });
     });
   }

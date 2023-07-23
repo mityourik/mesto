@@ -5,6 +5,7 @@ export class PopupWithQuestion extends Popup {
         super(popupSelector);// вызываем конструктор родительского класса
         this._submitCallback = submitCallback;
         this._submitButton = this._popup.querySelector('.popup__save-button');
+        this._defaultText = this._submitButton.textContent;
         this._handleEnterKey = this._handleEnterKey.bind(this);// Привязка контекста к this
     }
     
@@ -16,13 +17,11 @@ export class PopupWithQuestion extends Popup {
         document.addEventListener('keydown', this._handleEnterKey);// глобальный обработчик для Enter
     }
 
-    renderPreloader(loading, displayText) { //отобразить загрузка...
-        if (!this._submitButton) return;
+    renderPreloader(loading, displayText) {
         if (loading) {
-            this.defaulText = this._submitButton.textContent;
-            this._submitButton.textContent = displayText;
+          this._submitButton.textContent = displayText;
         } else {
-            this._submitButton.textContent = this.defaulText;//вернули исходный текст
+          this._submitButton.textContent = this._defaultText;
         }
     }
 

@@ -6,9 +6,10 @@ export class UserInfo {
   }
 
   getUserInfo() {
-    return {//возвращаем текущие значения заголовка и описания
+    return {//возвращаем текущие значения имени, описания и аватара
       name: this._nameElement.textContent,
-      about: this._descriptionElement.textContent
+      about: this._descriptionElement.textContent,
+      avatar: this._profileAvatar.src
     };
   }
 

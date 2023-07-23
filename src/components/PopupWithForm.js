@@ -6,7 +6,7 @@ export class PopupWithForm extends Popup {
     this._submitHandler = submitHandler;
     this._form = this._popup.querySelector('.popup__profile-form');
     this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
-    this._buttonSubmit = this._form.querySelector('[name="elements_submit_button"]');
+    this._buttonSubmit = this._form.querySelector('.popup__save-button');
   }
 
   _getInputValues() {
@@ -31,8 +31,15 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (event) => {
       event.preventDefault();
-      this._submitHandler(this._getInputValues());
-      this.close();
+      this._submitHandler(this._getInputValues())//ожидание завершения перед закрытием попапа
+      .then((result) => {
+        if (result) {
+          this.close();
+        }
+      })
+      .catch((error) => {
+        console.error('Ошибка обновления данных', error);
+      });
     });
   }
 

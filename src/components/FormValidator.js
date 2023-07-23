@@ -1,17 +1,17 @@
 export class FormValidator {
   constructor(settings, formElement) {
-    this._settings = settings; // объект настроек для валидации формы
-    this._formElement = formElement; // DOM-элемент формы
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector)); // массив полей ввода формы
-    this._buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector); // элемент кнопки отправки формы
+    this._settings = settings; 
+    this._formElement = formElement; 
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector)); 
+    this._buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector); 
   }
 
   // Показать сообщение об ошибке валидации
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add(this._settings.inputErrorClass); // добавить класс ошибки к полю ввода
-    errorElement.textContent = errorMessage; // установить текст сообщения об ошибке
-    errorElement.classList.add(this._settings.errorClass); // видимость ошибки
+    inputElement.classList.add(this._settings.inputErrorClass); 
+    errorElement.textContent = errorMessage; 
+    errorElement.classList.add(this._settings.errorClass);
   }
 
   // Скрыть сообщение об ошибке валидации
@@ -25,51 +25,50 @@ export class FormValidator {
   // Проверка валидности поля ввода
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(inputElement, inputElement.validationMessage); // если невалидно - показать сообщение об ошибке
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(inputElement); // если поле валидно - скрыть сообщение
+      this._hideInputError(inputElement);
     }
+  }
+
+  // проверка все ли поля валидны
+  _isEveryInputValid() {
+    return this._inputList.every((inputElement) => inputElement.validity.valid);
   }
 
   // Изменение состояния кнопки сабмита в зависимости от валидности полей
   _toggleButtonState() {
-    const isValid = this._inputList.every((inputElement) => inputElement.validity.valid); // проверка каждого поля на валидность
+    const isValid = this._isEveryInputValid(); 
     if (isValid) {
-      this._buttonElement.classList.remove(this._settings.inactiveButtonClass); // если все поля валидны - кнопка валидна
+      this._buttonElement.classList.remove(this._settings.inactiveButtonClass);
       this._buttonElement.disabled = false;
     } else {
-      this._buttonElement.classList.add(this._settings.inactiveButtonClass); // иначе - добавить невалидный статус
+      this._buttonElement.classList.add(this._settings.inactiveButtonClass);
       this._buttonElement.disabled = true;
     }
   }
 
-  // Сброс состояния валидации формы (добавлено для повторных открытий форм и скрытия ошибок)
+  // Сброс состояния валидации формы
   resetValidation() {
     this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement); // скрыть сообщение об ошибке
+      this._hideInputError(inputElement);
     });
-    this._toggleButtonState(); // переключить статутс кнопки сабмита
+    this._toggleButtonState();
   }
 
   // Установка обработчиков событий на поля ввода
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(inputElement); // проверить валидность поля ввода при его изменении
-        this._toggleButtonState(); // изменить состояние кнопки отправки
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
       });
     });
-  
-    this._formElement.addEventListener('submit', (event) => {
-      event.preventDefault(); // отменить отправку
-    });
-  
-    this._toggleButtonState(); // изначально установить состояние кнопки отправки
   }
 
   // Включение валидации формы
   enableValidation() {
-    this._setEventListeners(); // установить обработчики событий на поля ввода и слушателя события submit
-    this.resetValidation(); // сбросить состояние формы валидации
+    this._setEventListeners();
+    this.resetValidation();
   }
 }

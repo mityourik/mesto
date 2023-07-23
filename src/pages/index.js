@@ -111,7 +111,8 @@ function createCard(data, user) {
     handleCardLike: async (cardId) => {
       try {
         const res = await api.pushCardLike(cardId);
-        card.setLikesCount(res);
+        card.setLikesCount(res.likes);
+        card.updateLikes(true);//обновить лайки после успешного запроса
       } catch (err) {
         alert(err);
       }
@@ -119,7 +120,8 @@ function createCard(data, user) {
     handleLikeDelete: async (cardId) => {
       try {
         const res = await api.removeCardLike(cardId);
-        card.setLikesCount(res);
+        card.setLikesCount(res.likes);
+        card.updateLikes(false);//обновить лайки после успешного запроса
       } catch (err) {
         alert(err);
       }
@@ -151,6 +153,7 @@ const popupContentCell = new PopupWithForm({
       const newCard = await api.putNewCard(cardData);
       const newCardElement = createCard(newCard, userCurrentId);
       cardList.addItem(newCardElement);
+      return newCard; // Возвращаем данные новой карточки
     } catch (error) {
       console.error('Ошибка поста карты', error);
     }
@@ -192,11 +195,13 @@ const popupEditAvatar = new PopupWithForm({
     try {
       const newInfo = await api.patchUserAvatar(avatarData);
       userInfo.setUserAvatar(newInfo);
+      popupEditAvatar.renderPreloader(false);
       popupEditAvatar.close();
+      return newInfo;
     } catch (error) {
       console.error('Ошибка установки аватара', error);
-    } finally {
-      popupEditAvatar.renderPreloader(false);
+      alert(`Ошибка установки аватара: ${error.message}`);
+      return false;
     }
   }
 });

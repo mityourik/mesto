@@ -62,8 +62,12 @@ export class Card {
     }
   }
 
+  getId() {//метод для получения id карточки
+    return this.idCard;
+  }
+
   _handleDeleteCard() {
-    this._handleCardDelete(this, this.idCard);
+    this._handleCardDelete(this);
   }
 
   _handleClickOnImage() {

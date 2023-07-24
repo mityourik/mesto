@@ -9,12 +9,11 @@ export class PopupWithQuestion extends Popup {
         this._handleEnterKey = this._handleEnterKey.bind(this);// Привязка контекста к this
     }
     
-    open(cardElement, idCard) { //открыть и получить данные о карточке
+    open(cardElement) {
         super.open();
-        this.id = idCard;//записали id карточки
+        this.id = cardElement.getId(); //получить id карточки с помощью getId
         this.card = cardElement;
-        // Добавление обработчика события keydown при открытии
-        document.addEventListener('keydown', this._handleEnterKey);// глобальный обработчик для Enter
+        document.addEventListener('keydown', this._handleEnterKey);
     }
 
     renderPreloader(loading, displayText) {

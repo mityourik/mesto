@@ -49,8 +49,8 @@ function createCard(data, user) {
     handleCardClick: (name, link) => {
       popupContentPreview.open({ name, link });
     },
-    handleCardDelete: (cardId, cardElement) => {
-      popupContentConfirm.open(cardId, cardElement);
+    handleCardDelete: (cardElement) => {//передавать только экземпляр класса
+      popupContentConfirm.open(cardElement);
     },
     handleCardLike: async (cardId) => {
       try {
@@ -154,7 +154,7 @@ const popupContentCell = new PopupWithForm({
       const newCardElement = createCard(newCard, userCurrentId);
       cardsList.addItem(newCardElement);
       popupContentCell.renderPreloader(false);
-      return newCard; // Возвращаем данные новой карточки
+      return newCard;//возвращаем данные новой карточки
     } catch (error) {
       console.error('Ошибка поста карты', error);
     }

@@ -117,11 +117,11 @@ const editProfilePopup = new PopupWithForm({
     try {
       const res = await api.setUserInfoApi({ name, about });
       userInfo.setUserInfo(res);
+      editProfilePopup.close();
     } catch (err) {
       alert(err)
     } finally {
       editProfilePopup.renderPreloader(false);
-      editProfilePopup.close();
     }
   }
 });
@@ -150,12 +150,12 @@ const popupContentCell = new PopupWithForm({
       const newCard = await api.putNewCard(cardData);
       const newCardElement = createCard(newCard, userCurrentId);
       cardsSection.addItem(newCardElement);
+      popupContentCell.close();
       return newCard;//возвращаем данные новой карточки
     } catch (error) {
       console.error('Ошибка поста карты', error);
     } finally {
       popupContentCell.renderPreloader(false);
-      popupContentCell.close();
     }
   }
 });
@@ -168,11 +168,11 @@ const popupContentConfirm = new PopupWithQuestion({
     try {
       await api.deleteCard(cardId);
       card.deleteCard();
+      popupContentConfirm.close();
     } catch (err) {
       alert(err)
     } finally {
       popupContentConfirm.renderPreloader(false);
-      popupContentConfirm.close();
     }
   }
 })
@@ -188,6 +188,7 @@ const popupEditAvatar = new PopupWithForm({
     try {
       const newInfo = await api.patchUserAvatar(avatarData);
       userInfo.setUserAvatar(newInfo);
+      popupEditAvatar.close();
       return newInfo;
     } catch (error) {
       console.error('Ошибка установки аватара', error);
@@ -195,7 +196,6 @@ const popupEditAvatar = new PopupWithForm({
       return false;
     } finally {
       popupEditAvatar.renderPreloader(false);
-      popupEditAvatar.close();
     }
   }
 });

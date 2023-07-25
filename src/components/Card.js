@@ -37,7 +37,6 @@ export class Card {
   setLikesCount(likes) {//метод установки количества лайков
     this._likesCounter.textContent = likes.length; //установка количества лайков
     const isLiked = likes.some(user => user._id === this.userId);//проверка, ставил ли текущий пользователь лайк
-    this.updateLikes(isLiked);
   }
 
   deleteCard() {
@@ -46,12 +45,8 @@ export class Card {
     this._element = null;// обнуляем ссылку на DOM-элемент карточки
   }
 
-  updateLikes(isLiked) {
-    if (isLiked) {
-      this._likeButton.classList.add('elements__like-image_enabled');
-    } else {
-      this._likeButton.classList.remove('elements__like-image_enabled');
-    }
+  toggleLikeState() {
+    this._likeButton.classList.toggle('elements__like-image_enabled');
   }
 
   _handleLikeCard() {

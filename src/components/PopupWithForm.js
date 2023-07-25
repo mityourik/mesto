@@ -30,15 +30,7 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (event) => {
       event.preventDefault();
-      this._submitHandler(this._getInputValues())//ожидание завершения перед закрытием попапа
-      .then((result) => {
-        if (result) {
-          this.close();
-        }
-      })
-      .catch((error) => {
-        console.error('лол', error);
-      });
+      this._submitHandler(this._getInputValues());
     });
   }
 

@@ -11,7 +11,6 @@ export class PopupWithQuestion extends Popup {
     
     open(cardElement) {
         super.open();
-        this.id = cardElement.getId(); //получить id карточки с помощью getId
         this.card = cardElement;
         document.addEventListener('keydown', this._handleEnterKey);
     }
@@ -32,14 +31,14 @@ export class PopupWithQuestion extends Popup {
     setEventListeners() {
         super.setEventListeners();
         this._submitButton.addEventListener('click', () => {
-            this._submitCallback(this.id, this.card);//передача id и dom-элемента
+            this._submitCallback(this.card);//передать карточку в колбэк
         })
     }
 
     // Функция для обработки клавиши Enter
     _handleEnterKey(event) {
         if (event.key === 'Enter') {
-            this._submitCallback(this.id, this.card);//передаем для сабмита через Enter
+            this._submitCallback(this.card);//передаем для сабмита через Enter
             this.close();
         }
     }

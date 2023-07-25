@@ -10,19 +10,16 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithQuestion } from '../components/PopupWithQuestion.js';
 import { validationSettings, popupTypeSelector, profileConfig, apiConfig } from "../utils/constants.js";
 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ИМПОРТ УТИЛИТАРНЫХ ПЕРЕМЕННЫХ
+
+import { editAvatarButton, addNewCardButton, formEditProfile, 
+formAddNewCard, formSetNewAvatar, editProfileButton, nameInputElement,
+avatarInputElement, descrInputElement } from '../utils/constants.js';
+
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ОБЪЯВЛЕНИЕ ПЕРЕМЕННЫХ
 
 const SAVE_MESSAGE = 'Сохранение...';
 let userCurrentId;//для хранения идентификатора текущего пользователя
-const editAvatarButton = document.querySelector('.profile__image');
-const addNewCardButton = document.querySelector('.profile__add-icon');
-const formEditProfile = document.querySelector('[name="profile-form"]');
-const formAddNewCard = document.querySelector('[name="elements-form"]');
-const formSetNewAvatar = document.querySelector('[name="avatar-form"]');
-const editProfileButton = document.querySelector('.profile__edit-button');
-const nameInputElement = document.querySelector('[name="profile-input_name"]');
-const avatarInputElement = document.querySelector('[name="input_avatar_link"]');
-const descrInputElement = document.querySelector('[name="profile-input_description"]');
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ОБЪЯВЛЕНИЕ ФУНКЦИЙ
 
@@ -34,7 +31,7 @@ async function fetchProfileAndCards() {
     userCurrentId = resUser._id;
     userInfo.setUserInfo(resUser);
     userInfo.setUserAvatar(resUser);
-    cardsList.renderItems(resCard)
+    cardsSection.renderItems(resCard)
   } catch (err) {
       alert(err)
   }
@@ -56,7 +53,7 @@ function createCard(data, user) {
       try {
         const res = await api.pushCardLike(cardId);
         card.setLikesCount(res.likes);
-        card.updateLikes(true);//обновить лайки после успешного запроса
+        card.toggleLikeState(true);//обновить лайки после успешного запроса
       } catch (err) {
         alert(err);
       }
@@ -65,7 +62,7 @@ function createCard(data, user) {
       try {
         const res = await api.removeCardLike(cardId);
         card.setLikesCount(res.likes);
-        card.updateLikes(false);
+        card.toggleLikeState(false);
       } catch (err) {
         alert(err);
       }
@@ -120,11 +117,11 @@ const editProfilePopup = new PopupWithForm({
     try {
       const res = await api.setUserInfoApi({ name, about });
       userInfo.setUserInfo(res);
-      editProfilePopup.close();
     } catch (err) {
       alert(err)
     } finally {
       editProfilePopup.renderPreloader(false);
+      editProfilePopup.close();
     }
   }
 });
@@ -133,10 +130,10 @@ const editProfilePopup = new PopupWithForm({
 const popupContentPreview = new PopupWithImage(popupTypeSelector.popupContentPreview);
 
 // экземпляр класса для отрисовки карточек
-const cardsList = new Section({
+const cardsSection = new Section({
   renderer: (item) => {
     const cardElement = createCard(item, userCurrentId);
-    cardsList.addItem(cardElement);
+    cardsSection.addItem(cardElement);
   }
 }, '.elements__cards');
 
@@ -152,28 +149,30 @@ const popupContentCell = new PopupWithForm({
     try {
       const newCard = await api.putNewCard(cardData);
       const newCardElement = createCard(newCard, userCurrentId);
-      cardsList.addItem(newCardElement);
-      popupContentCell.renderPreloader(false);
+      cardsSection.addItem(newCardElement);
       return newCard;//возвращаем данные новой карточки
     } catch (error) {
       console.error('Ошибка поста карты', error);
+    } finally {
+      popupContentCell.renderPreloader(false);
+      popupContentCell.close();
     }
   }
 });
 
-// экземпляр класса для попапа подтверждения удаления
 const popupContentConfirm = new PopupWithQuestion({
   popupSelector: popupTypeSelector.popupContentConfirm,
-  submitCallback: async (id, card) => {
+  submitCallback: async (card) => { // передал карточку
+    const cardId = card.getId(); // получил id из объекта card
     popupContentConfirm.renderPreloader(true, 'карточка всё...');
     try {
-      await api.deleteCard(id);
+      await api.deleteCard(cardId);
       card.deleteCard();
-      popupContentConfirm.close();
     } catch (err) {
       alert(err)
     } finally {
       popupContentConfirm.renderPreloader(false);
+      popupContentConfirm.close();
     }
   }
 })
@@ -189,13 +188,14 @@ const popupEditAvatar = new PopupWithForm({
     try {
       const newInfo = await api.patchUserAvatar(avatarData);
       userInfo.setUserAvatar(newInfo);
-      popupEditAvatar.renderPreloader(false);
-      popupEditAvatar.close();
       return newInfo;
     } catch (error) {
       console.error('Ошибка установки аватара', error);
       alert(`Ошибка установки аватара: ${error.message}`);
       return false;
+    } finally {
+      popupEditAvatar.renderPreloader(false);
+      popupEditAvatar.close();
     }
   }
 });

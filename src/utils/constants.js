@@ -17,7 +17,7 @@ export const validationSettings = {
     inputErrorClass: 'popup__input_error',
     submitButtonSelector: '.popup__save-button',
     inactiveButtonClass: 'popup__save-button_invalid'
-  };
+};
 
 //селекторы попапов
 export const popupTypeSelector = {

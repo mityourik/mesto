@@ -1,6 +1,6 @@
 import './index.css';   //>>>>>>>>>>>>>>>>> ИМПОРТЫ МОДУЛЕЙ
 
-import { Api } from '../components/API.js';
+import { Api } from '../components/Api.js';
 import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
 import { UserInfo } from "../components/UserInfo.js";
